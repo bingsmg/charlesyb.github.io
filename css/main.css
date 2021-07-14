@@ -1331,6 +1331,7 @@ pre code {
 .site-brand-container {
   display: flex;
   flex-shrink: 0;
+  background: url("/images/brand-background.jpg") 100% 100% !important;
   padding: 0 10px;
 }
 .use-motion .header,
@@ -3114,4 +3115,19 @@ body {
   background-attachment: fixed;
   background-position: 50% 50%;
   background-size: 100% 100%;
+}
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+}
+.post-body p a:hover {
+  color: #ff106c;
+}
+a,
+span.exturl {
+  border-bottom: none;
+}
+a:hover,
+span.exturl:hover {
+  color: #ff106c;
 }
