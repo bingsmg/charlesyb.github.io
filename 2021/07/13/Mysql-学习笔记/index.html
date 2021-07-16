@@ -27,15 +27,15 @@
 <meta property="og:site_name" content="Charles&#39;s Blog">
 <meta property="og:description" content="MySQL 学习笔记DDL123456789101112131415161718192021222324252627282930313233343536373839404142##############  创建删除数据库  ###############create database [if not exists] db_name character set utf8 collate utf8_">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://qw6p83pez.bkt.gdipper.com/img/%E6%9D%83%E9%99%90%E7%AC%A6.png?imagelim">
-<meta property="og:image" content="http://qw6p83pez.bkt.gdipper.com/img/Mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg?imagelim">
-<meta property="og:image" content="http://qw6p83pez.bkt.gdipper.com/img/where%E5%AD%90%E5%8F%A5%E8%BF%90%E7%AE%97%E7%AC%A6.png?imagelim">
+<meta property="og:image" content="http://qwbf05t3a.bkt.clouddn.com/images/%E6%9D%83%E9%99%90%E7%AC%A6.png?Charles">
+<meta property="og:image" content="http://qwbf05t3a.bkt.clouddn.com/images/Mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg?Charles">
+<meta property="og:image" content="http://qwbf05t3a.bkt.clouddn.com/images/where%E5%AD%90%E5%8F%A5%E8%BF%90%E7%AE%97%E7%AC%A6.png?Charles">
 <meta property="article:published_time" content="2021-07-13T14:04:03.000Z">
-<meta property="article:modified_time" content="2021-07-13T14:38:52.819Z">
+<meta property="article:modified_time" content="2021-07-16T02:34:43.168Z">
 <meta property="article:author" content="Charles">
 <meta property="article:tag" content="Mysql">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://qw6p83pez.bkt.gdipper.com/img/%E6%9D%83%E9%99%90%E7%AC%A6.png?imagelim">
+<meta name="twitter:image" content="http://qwbf05t3a.bkt.clouddn.com/images/%E6%9D%83%E9%99%90%E7%AC%A6.png?Charles">
 
 
 <link rel="canonical" href="https://charlesyb.github.io/2021/07/13/Mysql-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
@@ -242,10 +242,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-07-13 22:04:03 / 修改时间：22:38:52" itemprop="dateCreated datePublished" datetime="2021-07-13T22:04:03+08:00">2021-07-13</time>
+      <time title="创建时间：2021-07-13 22:04:03" itemprop="dateCreated datePublished" datetime="2021-07-13T22:04:03+08:00">2021-07-13</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-07-16 10:34:43" itemprop="dateModified" datetime="2021-07-16T10:34:43+08:00">2021-07-16</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -314,14 +320,14 @@
 
 <h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">##################  给用户授权  ###################</span><br><span class="line">grant permissions on databaseName.object to &#x27;userName&#x27;@&#x27;ipaddr&#x27;[identified by &#x27;password&#x27;]</span><br><span class="line">-- * 代表所有对象</span><br><span class="line">-- identified by 可选，如果用户存在就是修改密码，如果不存在就是创建用户</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qw6p83pez.bkt.gdipper.com/img/%E6%9D%83%E9%99%90%E7%AC%A6.png?imagelim" alt="image-20210713181752641"></p>
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p><img src="http://qw6p83pez.bkt.gdipper.com/img/Mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg?imagelim" alt="image-20210629113425322"></p>
+<p><img src="http://qwbf05t3a.bkt.clouddn.com/images/%E6%9D%83%E9%99%90%E7%AC%A6.png?Charles" alt="权限符"></p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p><img src="http://qwbf05t3a.bkt.clouddn.com/images/Mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg?Charles" alt="Mysql数据类型"></p>
 <ol>
 <li>float 单精度，double 双精度，decimal(M,D)，M最大65，D最大30</li>
 <li>char(size) 固定字符串，最大 255 字符；varchar(size) 0~65535字节，utf8编码最大 21844 字符，取决于表的编码，varchar 本身还需要 1-3 个字节来记录存放的内容长度</li>
 <li>text 数据类型不能有默认值，大小 0-2^16 字节，menidumtext 0-2^24，longtext 0~2^32；</li>
 </ol>
-<h2 id="where-子句运算符"><a href="#where-子句运算符" class="headerlink" title="where 子句运算符"></a>where 子句运算符</h2><p><img src="http://qw6p83pez.bkt.gdipper.com/img/where%E5%AD%90%E5%8F%A5%E8%BF%90%E7%AE%97%E7%AC%A6.png?imagelim" alt="image-20210629120022950"></p>
+<h2 id="where-子句运算符"><a href="#where-子句运算符" class="headerlink" title="where 子句运算符"></a>where 子句运算符</h2><p><img src="http://qwbf05t3a.bkt.clouddn.com/images/where%E5%AD%90%E5%8F%A5%E8%BF%90%E7%AE%97%E7%AC%A6.png?Charles" alt="where子句运算符"></p>
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">-- dual 亚元素，双元表，系统表，可以作为测试表使用</span><br><span class="line"></span><br><span class="line">-- 数值相关</span><br><span class="line">count() : 返回行的总数</span><br><span class="line">sum(列名) : 返回满足 where 子句的行的和</span><br><span class="line">avg(列名) : 返回满足 where 子句的一列的平均值</span><br><span class="line">max(列名)/min() : 满足 where 条件的一列的最大值、最小值</span><br><span class="line"></span><br><span class="line">-- 字符串相关</span><br><span class="line">charset(str) : 返回子串字符集</span><br><span class="line">concat(string [,]) : 连接子串</span><br><span class="line">instr(string, substring) : 返回 sub 在 string 中出现的位置</span><br><span class="line">ucase(string)/lcase(string) : 转化大小写</span><br><span class="line">left(string, length) : 从 string 的左边起取 length 个字符</span><br><span class="line">length(string) : string 长度【按照字节】</span><br><span class="line">replace(str, search_str, replace_str) 在 str 中替换search_str 为 replace_str</span><br><span class="line">strcmp(str1, str2) : 逐字符比较两 str 大小</span><br><span class="line">substring(str, position [, length]) : 从 str 的 pos【默认1】 开始取 len 个字符</span><br><span class="line">ltrim()/rtrim(string)/trim() : 去除前后端空格</span><br><span class="line"></span><br><span class="line">-- 数学相关</span><br><span class="line">abs(num1)</span><br><span class="line">bin(decimal_number) : 十进制转二进制</span><br><span class="line">ceiling(num1)/floor() : 上下取整</span><br><span class="line">conv(num1, from_base, to_base)</span><br><span class="line">format(num1, decimal_places)</span><br><span class="line">hex(num1) : 转 16 进制</span><br><span class="line">least(num1, num2,...) </span><br><span class="line">mod(num1, denominator)</span><br><span class="line">rand(seed)</span><br><span class="line"></span><br><span class="line">-- 时间日期函数</span><br><span class="line">current_date()/current_time()/current_timestamp()</span><br><span class="line">date()</span><br><span class="line">date_add(date2, interval d_value d_type)/date_sub(): 在 date2 中加上日期或时间</span><br><span class="line">datediff(date1, date2) : 两个日期差（结果是天）</span><br><span class="line">timediff(date1, date2) : 两个时间差（多少时间多少分钟多少秒）</span><br><span class="line">now() : 当前时间</span><br><span class="line">year()|month()|date(datetime)|minute()|day()</span><br><span class="line">last_day() : 返回该日期当月最后一天</span><br><span class="line">from_unixtime() : 年月日</span><br><span class="line"></span><br><span class="line">-- 加密和系统函数</span><br><span class="line">user() : 查询用户</span><br><span class="line">database() : 数据库名称</span><br><span class="line">md5(str) : 为字符串算出 md5 32的字符串</span><br><span class="line">password(str) : 从原文 str 计算并返回密码字符</span><br><span class="line"></span><br><span class="line">-- 流程控制函数</span><br><span class="line">if(expr1, expr2, expr3) : 如果 expr1 为 true, 则返回 expr2, 否则返回 expr3</span><br><span class="line">ifnull(expr1, expr2) : 如果 expr1 不为 null, 则返回本身，否则返回 expr2</span><br><span class="line">select case when expr1 then expr2 when expr3 then expr4 else expr5 end : 如果 expr1 为 true, 则返回 expr2, 如果 expr2 为 true，返回 expr4, 否则返回 expr5</span><br></pre></td></tr></table></figure>
 
 <h2 id="数据约束"><a href="#数据约束" class="headerlink" title="数据约束"></a>数据约束</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 五个数据约束</span><br><span class="line">primary key</span><br><span class="line">not null</span><br><span class="line">unique</span><br><span class="line">foreign key(本表字段名) references (主表名)</span><br><span class="line">check</span><br><span class="line"></span><br><span class="line"># 自增长</span><br><span class="line">auto_increment</span><br><span class="line"></span><br></pre></td></tr></table></figure>
