@@ -208,135 +208,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/07/13/Mysql-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/07/13/Mysql-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Mysql 学习笔记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-07-13 22:04:03" itemprop="dateCreated datePublished" datetime="2021-07-13T22:04:03+08:00">2021-07-13</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-07-16 10:34:43" itemprop="dateModified" datetime="2021-07-16T10:34:43+08:00">2021-07-16</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
-        </span>
-    </span>
-
-  <div>
-    
-</div>
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="MySQL-学习笔记"><a href="#MySQL-学习笔记" class="headerlink" title="MySQL 学习笔记"></a>MySQL 学习笔记</h1><h2 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">##############  创建删除数据库  ###############</span><br><span class="line">create database [if not exists] db_name character set utf8 collate utf8_bin;</span><br><span class="line">drop database [if not exists] db_name;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">################  展示数据库  #################</span><br><span class="line">show database;</span><br><span class="line">show create database;</span><br><span class="line"></span><br><span class="line">################  备份恢复库表  ################</span><br><span class="line">mysqldump -u username -p -B db1 db2 dbn &gt; filename.sql</span><br><span class="line">source filename.sql</span><br><span class="line">mysqldump -u username -p db1 tab1 tab2 &gt; filepath.sql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##################  创建表  ###################</span><br><span class="line">create table tab_name (</span><br><span class="line">	field1 datatype,</span><br><span class="line">    field2 datatype,</span><br><span class="line">    field3 datatype</span><br><span class="line">) character set utf8 collate utf8_global_bin engine innodb;</span><br><span class="line"></span><br><span class="line">				</span><br><span class="line">##################  修改表  ###################</span><br><span class="line">alter table tab_name</span><br><span class="line">add (column1 datatype [default expr], column2 datatype);</span><br><span class="line"></span><br><span class="line">alter table tab_name</span><br><span class="line">modify (column1 datatype [default expr], column2 datatype);</span><br><span class="line"></span><br><span class="line">alter table tab_name</span><br><span class="line">drop (column1);</span><br><span class="line"></span><br><span class="line">alter table tab_name </span><br><span class="line">change[column] old_name new_name [first|after col_name]</span><br><span class="line"></span><br><span class="line">desc tab_name;</span><br><span class="line"></span><br><span class="line">alter table old_tab_name [to] new_tab_name;</span><br><span class="line">alter table tab_name character set utf8;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="DML"><a href="#DML" class="headerlink" title="DML"></a>DML</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">insert into tab_name[(column1, column2, ...)]</span><br><span class="line">values(val1, value2, value....);</span><br><span class="line"></span><br><span class="line">update tab_name</span><br><span class="line">set column1 = expr1, column2=expr2</span><br><span class="line">[where where_definition];</span><br><span class="line"></span><br><span class="line">delete from tab_name</span><br><span class="line">[where where_definition];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="DQL"><a href="#DQL" class="headerlink" title="DQL"></a>DQL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">select [distinct] * | &#123;column1, column2,...&#125; as othername</span><br><span class="line">from tab_name</span><br><span class="line">group by column1 </span><br><span class="line">having condition1</span><br><span class="line">order by column1 asc | column2 desc</span><br><span class="line">limit start1, rows</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- 分页查询</span><br><span class="line">select * from emp</span><br><span class="line">	order by empno</span><br><span class="line">	limit 每页显示的记录数 * (第几页-1), 每页显示的记录数</span><br><span class="line"></span><br><span class="line">-- 合并查询</span><br><span class="line">union all : 该操作符取得两个结果集的并集，不去重复行</span><br><span class="line">union : 去重复行</span><br><span class="line"></span><br><span class="line">-- 外连接</span><br><span class="line">-- 左外连接: 如果左侧的表完全显示</span><br><span class="line">-- 右外连接: 如果右边的表完全显示</span><br><span class="line">select .. from tab1 left join tab2 on condition1</span><br><span class="line">select .. from tab1 right join tab2 on condition2</span><br><span class="line"></span><br><span class="line">-- 如何使用 like 操作符</span><br><span class="line">% ： 0 到多个字符</span><br><span class="line">_ : 单个字符</span><br><span class="line">? : 如何显示</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="DCL"><a href="#DCL" class="headerlink" title="DCL"></a>DCL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">grant 权限列表 on 库.对象 to &#x27;username&#x27;@&#x27;ip&#x27; [identified by &#x27;password&#x27;]</span><br><span class="line"># identified by &#x27;password&#x27; 可有可无，作用如下</span><br><span class="line">-- 1. 如果用户存在，就是修改密码</span><br><span class="line">-- 2. 用户不存在，就是创建用户</span><br><span class="line"></span><br><span class="line"># 注：如果不指定 host 则为 % , 表示所有 IP 都有连接权限。</span><br><span class="line"></span><br><span class="line">revoke 权限列表 on 库.对象 to &#x27;username&#x27;@&#x27;ip&#x27;</span><br><span class="line"></span><br><span class="line"># 刷新权限</span><br><span class="line">flush privileges;</span><br><span class="line"></span><br><span class="line"># 创建用户</span><br><span class="line">create user &#x27;username&#x27;@&#x27;ip&#x27; identified by &#x27;password&#x27;;</span><br><span class="line"># 删除用户</span><br><span class="line">drop user &#x27;username&#x27;@&#x27;ip&#x27;;</span><br><span class="line"># 修改用户密码</span><br><span class="line">-- 1. 修改自己的密码</span><br><span class="line">set password = password(&#x27;password&#x27;);</span><br><span class="line">-- 2. 修改其他人的</span><br><span class="line">set password for &#x27;username&#x27;@&#x27;ip&#x27; = password(&#x27;password&#x27;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="视图，索引"><a href="#视图，索引" class="headerlink" title="视图，索引"></a>视图，索引</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 视图是一个虚拟表，内容由查询定义。同真实的表一样，视图包含列，数据来自对应的真实表（基表）</span><br><span class="line"></span><br><span class="line">##################  创建视图  ###################</span><br><span class="line">create view viewName as select ...</span><br><span class="line"></span><br><span class="line">##################  更新视图  ###################</span><br><span class="line">alter view viewName as select ...</span><br><span class="line"></span><br><span class="line">###############  展示视图创建语句  ###############</span><br><span class="line">show create view viewName</span><br><span class="line"></span><br><span class="line">##################  删除视图  ###################</span><br><span class="line">drop view viewName1, viewName2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">##################  创建用户  ###################</span><br><span class="line">create user &#x27;userName&#x27;@&#x27;ipaddr&#x27; identified by &#x27;password&#x27;</span><br><span class="line"></span><br><span class="line">##################  删除用户  ###################</span><br><span class="line">drop user &#x27;userName&#x27;@&#x27;ipaddr&#x27;</span><br><span class="line"></span><br><span class="line">#################  用户修改密码  ##################</span><br><span class="line">-- 本人修改</span><br><span class="line">set password = password(&#x27;password&#x27;)</span><br><span class="line">-- 修改他们的密码（当然需要修改用户的权限呢）</span><br><span class="line">set password for &#x27;userName&#x27;@&#x27;ipaddr&#x27; = password(&#x27;密码&#x27;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">##################  给用户授权  ###################</span><br><span class="line">grant permissions on databaseName.object to &#x27;userName&#x27;@&#x27;ipaddr&#x27;[identified by &#x27;password&#x27;]</span><br><span class="line">-- * 代表所有对象</span><br><span class="line">-- identified by 可选，如果用户存在就是修改密码，如果不存在就是创建用户</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="http://qwbf05t3a.bkt.clouddn.com/images/%E6%9D%83%E9%99%90%E7%AC%A6.png?Charles" alt="权限符"></p>
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p><img src="http://qwbf05t3a.bkt.clouddn.com/images/Mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg?Charles" alt="Mysql数据类型"></p>
-<ol>
-<li>float 单精度，double 双精度，decimal(M,D)，M最大65，D最大30</li>
-<li>char(size) 固定字符串，最大 255 字符；varchar(size) 0~65535字节，utf8编码最大 21844 字符，取决于表的编码，varchar 本身还需要 1-3 个字节来记录存放的内容长度</li>
-<li>text 数据类型不能有默认值，大小 0-2^16 字节，menidumtext 0-2^24，longtext 0~2^32；</li>
-</ol>
-<h2 id="where-子句运算符"><a href="#where-子句运算符" class="headerlink" title="where 子句运算符"></a>where 子句运算符</h2><p><img src="http://qwbf05t3a.bkt.clouddn.com/images/where%E5%AD%90%E5%8F%A5%E8%BF%90%E7%AE%97%E7%AC%A6.png?Charles" alt="where子句运算符"></p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">-- dual 亚元素，双元表，系统表，可以作为测试表使用</span><br><span class="line"></span><br><span class="line">-- 数值相关</span><br><span class="line">count() : 返回行的总数</span><br><span class="line">sum(列名) : 返回满足 where 子句的行的和</span><br><span class="line">avg(列名) : 返回满足 where 子句的一列的平均值</span><br><span class="line">max(列名)/min() : 满足 where 条件的一列的最大值、最小值</span><br><span class="line"></span><br><span class="line">-- 字符串相关</span><br><span class="line">charset(str) : 返回子串字符集</span><br><span class="line">concat(string [,]) : 连接子串</span><br><span class="line">instr(string, substring) : 返回 sub 在 string 中出现的位置</span><br><span class="line">ucase(string)/lcase(string) : 转化大小写</span><br><span class="line">left(string, length) : 从 string 的左边起取 length 个字符</span><br><span class="line">length(string) : string 长度【按照字节】</span><br><span class="line">replace(str, search_str, replace_str) 在 str 中替换search_str 为 replace_str</span><br><span class="line">strcmp(str1, str2) : 逐字符比较两 str 大小</span><br><span class="line">substring(str, position [, length]) : 从 str 的 pos【默认1】 开始取 len 个字符</span><br><span class="line">ltrim()/rtrim(string)/trim() : 去除前后端空格</span><br><span class="line"></span><br><span class="line">-- 数学相关</span><br><span class="line">abs(num1)</span><br><span class="line">bin(decimal_number) : 十进制转二进制</span><br><span class="line">ceiling(num1)/floor() : 上下取整</span><br><span class="line">conv(num1, from_base, to_base)</span><br><span class="line">format(num1, decimal_places)</span><br><span class="line">hex(num1) : 转 16 进制</span><br><span class="line">least(num1, num2,...) </span><br><span class="line">mod(num1, denominator)</span><br><span class="line">rand(seed)</span><br><span class="line"></span><br><span class="line">-- 时间日期函数</span><br><span class="line">current_date()/current_time()/current_timestamp()</span><br><span class="line">date()</span><br><span class="line">date_add(date2, interval d_value d_type)/date_sub(): 在 date2 中加上日期或时间</span><br><span class="line">datediff(date1, date2) : 两个日期差（结果是天）</span><br><span class="line">timediff(date1, date2) : 两个时间差（多少时间多少分钟多少秒）</span><br><span class="line">now() : 当前时间</span><br><span class="line">year()|month()|date(datetime)|minute()|day()</span><br><span class="line">last_day() : 返回该日期当月最后一天</span><br><span class="line">from_unixtime() : 年月日</span><br><span class="line"></span><br><span class="line">-- 加密和系统函数</span><br><span class="line">user() : 查询用户</span><br><span class="line">database() : 数据库名称</span><br><span class="line">md5(str) : 为字符串算出 md5 32的字符串</span><br><span class="line">password(str) : 从原文 str 计算并返回密码字符</span><br><span class="line"></span><br><span class="line">-- 流程控制函数</span><br><span class="line">if(expr1, expr2, expr3) : 如果 expr1 为 true, 则返回 expr2, 否则返回 expr3</span><br><span class="line">ifnull(expr1, expr2) : 如果 expr1 不为 null, 则返回本身，否则返回 expr2</span><br><span class="line">select case when expr1 then expr2 when expr3 then expr4 else expr5 end : 如果 expr1 为 true, 则返回 expr2, 如果 expr2 为 true，返回 expr4, 否则返回 expr5</span><br></pre></td></tr></table></figure>
-
-<h2 id="数据约束"><a href="#数据约束" class="headerlink" title="数据约束"></a>数据约束</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 五个数据约束</span><br><span class="line">primary key</span><br><span class="line">not null</span><br><span class="line">unique</span><br><span class="line">foreign key(本表字段名) references (主表名)</span><br><span class="line">check</span><br><span class="line"></span><br><span class="line"># 自增长</span><br><span class="line">auto_increment</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="细节处理"><a href="#细节处理" class="headerlink" title="细节处理"></a>细节处理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">between a and b : 包含 a 和 b</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/07/13/Typora%E9%87%8C%E6%90%AD%E5%BB%BA%E4%B8%83%E7%89%9B%E5%9B%BE%E5%BA%8A%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -413,6 +284,134 @@
 </li>
 </ol>
 <h3 id="三、Typora里配置PicGo路径"><a href="#三、Typora里配置PicGo路径" class="headerlink" title="三、Typora里配置PicGo路径"></a>三、Typora里配置PicGo路径</h3><h3 id="四、复制上传成功"><a href="#四、复制上传成功" class="headerlink" title="四、复制上传成功"></a>四、复制上传成功</h3>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/07/13/Mysql-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Charles">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/13/Mysql-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Mysql 学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-13 22:04:03" itemprop="dateCreated datePublished" datetime="2021-07-13T22:04:03+08:00">2021-07-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-07-16 11:11:24" itemprop="dateModified" datetime="2021-07-16T11:11:24+08:00">2021-07-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
+        </span>
+    </span>
+
+  <div>
+    
+</div>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="MySQL-学习笔记"><a href="#MySQL-学习笔记" class="headerlink" title="MySQL 学习笔记"></a>MySQL 学习笔记</h1><h2 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">##############  创建删除数据库  ###############</span><br><span class="line">create database [if not exists] db_name character set utf8 collate utf8_bin;</span><br><span class="line">drop database [if not exists] db_name;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">################  展示数据库  #################</span><br><span class="line">show database;</span><br><span class="line">show create database;</span><br><span class="line"></span><br><span class="line">################  备份恢复库表  ################</span><br><span class="line">mysqldump -u username -p -B db1 db2 dbn &gt; filename.sql</span><br><span class="line">source filename.sql</span><br><span class="line">mysqldump -u username -p db1 tab1 tab2 &gt; filepath.sql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##################  创建表  ###################</span><br><span class="line">create table tab_name (</span><br><span class="line">	field1 datatype,</span><br><span class="line">    field2 datatype,</span><br><span class="line">    field3 datatype</span><br><span class="line">) character set utf8 collate utf8_global_bin engine innodb;</span><br><span class="line"></span><br><span class="line">				</span><br><span class="line">##################  修改表  ###################</span><br><span class="line">alter table tab_name</span><br><span class="line">add (column1 datatype [default expr], column2 datatype);</span><br><span class="line"></span><br><span class="line">alter table tab_name</span><br><span class="line">modify (column1 datatype [default expr], column2 datatype);</span><br><span class="line"></span><br><span class="line">alter table tab_name</span><br><span class="line">drop (column1);</span><br><span class="line"></span><br><span class="line">alter table tab_name </span><br><span class="line">change[column] old_name new_name [first|after col_name]</span><br><span class="line"></span><br><span class="line">desc tab_name;</span><br><span class="line"></span><br><span class="line">alter table old_tab_name [to] new_tab_name;</span><br><span class="line">alter table tab_name character set utf8;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="DML"><a href="#DML" class="headerlink" title="DML"></a>DML</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">insert into tab_name[(column1, column2, ...)]</span><br><span class="line">values(val1, value2, value....);</span><br><span class="line"></span><br><span class="line">update tab_name</span><br><span class="line">set column1 = expr1, column2=expr2</span><br><span class="line">[where where_definition];</span><br><span class="line"></span><br><span class="line">delete from tab_name</span><br><span class="line">[where where_definition];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="DQL"><a href="#DQL" class="headerlink" title="DQL"></a>DQL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">select [distinct] * | &#123;column1, column2,...&#125; as othername</span><br><span class="line">from tab_name</span><br><span class="line">group by column1 </span><br><span class="line">having condition1</span><br><span class="line">order by column1 asc | column2 desc</span><br><span class="line">limit start1, rows</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- 分页查询</span><br><span class="line">select * from emp</span><br><span class="line">	order by empno</span><br><span class="line">	limit 每页显示的记录数 * (第几页-1), 每页显示的记录数</span><br><span class="line"></span><br><span class="line">-- 合并查询</span><br><span class="line">union all : 该操作符取得两个结果集的并集，不去重复行</span><br><span class="line">union : 去重复行</span><br><span class="line"></span><br><span class="line">-- 外连接</span><br><span class="line">-- 左外连接: 如果左侧的表完全显示</span><br><span class="line">-- 右外连接: 如果右边的表完全显示</span><br><span class="line">select .. from tab1 left join tab2 on condition1</span><br><span class="line">select .. from tab1 right join tab2 on condition2</span><br><span class="line"></span><br><span class="line">-- 如何使用 like 操作符</span><br><span class="line">% ： 0 到多个字符</span><br><span class="line">_ : 单个字符</span><br><span class="line">? : 如何显示</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="DCL"><a href="#DCL" class="headerlink" title="DCL"></a>DCL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">grant 权限列表 on 库.对象 to &#x27;username&#x27;@&#x27;ip&#x27; [identified by &#x27;password&#x27;]</span><br><span class="line"># identified by &#x27;password&#x27; 可有可无，作用如下</span><br><span class="line">-- 1. 如果用户存在，就是修改密码</span><br><span class="line">-- 2. 用户不存在，就是创建用户</span><br><span class="line"></span><br><span class="line"># 注：如果不指定 host 则为 % , 表示所有 IP 都有连接权限。</span><br><span class="line"></span><br><span class="line">revoke 权限列表 on 库.对象 to &#x27;username&#x27;@&#x27;ip&#x27;</span><br><span class="line"></span><br><span class="line"># 刷新权限</span><br><span class="line">flush privileges;</span><br><span class="line"></span><br><span class="line"># 创建用户</span><br><span class="line">create user &#x27;username&#x27;@&#x27;ip&#x27; identified by &#x27;password&#x27;;</span><br><span class="line"># 删除用户</span><br><span class="line">drop user &#x27;username&#x27;@&#x27;ip&#x27;;</span><br><span class="line"># 修改用户密码</span><br><span class="line">-- 1. 修改自己的密码</span><br><span class="line">set password = password(&#x27;password&#x27;);</span><br><span class="line">-- 2. 修改其他人的</span><br><span class="line">set password for &#x27;username&#x27;@&#x27;ip&#x27; = password(&#x27;password&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="视图，索引"><a href="#视图，索引" class="headerlink" title="视图，索引"></a>视图，索引</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 视图是一个虚拟表，内容由查询定义。同真实的表一样，视图包含列，数据来自对应的真实表（基表）</span><br><span class="line"></span><br><span class="line">##################  创建视图  ###################</span><br><span class="line">create view viewName as select ...</span><br><span class="line"></span><br><span class="line">##################  更新视图  ###################</span><br><span class="line">alter view viewName as select ...</span><br><span class="line"></span><br><span class="line">###############  展示视图创建语句  ###############</span><br><span class="line">show create view viewName</span><br><span class="line"></span><br><span class="line">##################  删除视图  ###################</span><br><span class="line">drop view viewName1, viewName2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">##################  创建用户  ###################</span><br><span class="line">create user &#x27;userName&#x27;@&#x27;ipaddr&#x27; identified by &#x27;password&#x27;</span><br><span class="line"></span><br><span class="line">##################  删除用户  ###################</span><br><span class="line">drop user &#x27;userName&#x27;@&#x27;ipaddr&#x27;</span><br><span class="line"></span><br><span class="line">#################  用户修改密码  ##################</span><br><span class="line">-- 本人修改</span><br><span class="line">set password = password(&#x27;password&#x27;)</span><br><span class="line">-- 修改他们的密码（当然需要修改用户的权限呢）</span><br><span class="line">set password for &#x27;userName&#x27;@&#x27;ipaddr&#x27; = password(&#x27;密码&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">##################  给用户授权  ###################</span><br><span class="line">grant permissions on databaseName.object to &#x27;userName&#x27;@&#x27;ipaddr&#x27;[identified by &#x27;password&#x27;]</span><br><span class="line">-- * 代表所有对象</span><br><span class="line">-- identified by 可选，如果用户存在就是修改密码，如果不存在就是创建用户</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/07/16/t8ryvpilRPKZ7ef.png" alt="权限符"></p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p><img src="https://i.loli.net/2021/07/16/Q8gzlvPo4wsTj2O.png" alt="Mysql数据类型"></p>
+<ol>
+<li>float 单精度，double 双精度，decimal(M,D)，M最大65，D最大30</li>
+<li>char(size) 固定字符串，最大 255 字符；varchar(size) 0~65535字节，utf8编码最大 21844 字符，取决于表的编码，varchar 本身还需要 1-3 个字节来记录存放的内容长度</li>
+<li>text 数据类型不能有默认值，大小 0-2^16 字节，menidumtext 0-2^24，longtext 0~2^32；</li>
+</ol>
+<h2 id="where-子句运算符"><a href="#where-子句运算符" class="headerlink" title="where 子句运算符"></a>where 子句运算符</h2><p><img src="https://i.loli.net/2021/07/16/i7PcdNjG2fVqhrm.png" alt="where子句运算符"></p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数<img src="where%E5%AD%90%E5%8F%A5%E8%BF%90%E7%AE%97%E7%AC%A6.png" alt="where子句运算符"></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">-- dual 亚元素，双元表，系统表，可以作为测试表使用</span><br><span class="line"></span><br><span class="line">-- 数值相关</span><br><span class="line">count() : 返回行的总数</span><br><span class="line">sum(列名) : 返回满足 where 子句的行的和</span><br><span class="line">avg(列名) : 返回满足 where 子句的一列的平均值</span><br><span class="line">max(列名)/min() : 满足 where 条件的一列的最大值、最小值</span><br><span class="line"></span><br><span class="line">-- 字符串相关</span><br><span class="line">charset(str) : 返回子串字符集</span><br><span class="line">concat(string [,]) : 连接子串</span><br><span class="line">instr(string, substring) : 返回 sub 在 string 中出现的位置</span><br><span class="line">ucase(string)/lcase(string) : 转化大小写</span><br><span class="line">left(string, length) : 从 string 的左边起取 length 个字符</span><br><span class="line">length(string) : string 长度【按照字节】</span><br><span class="line">replace(str, search_str, replace_str) 在 str 中替换search_str 为 replace_str</span><br><span class="line">strcmp(str1, str2) : 逐字符比较两 str 大小</span><br><span class="line">substring(str, position [, length]) : 从 str 的 pos【默认1】 开始取 len 个字符</span><br><span class="line">ltrim()/rtrim(string)/trim() : 去除前后端空格</span><br><span class="line"></span><br><span class="line">-- 数学相关</span><br><span class="line">abs(num1)</span><br><span class="line">bin(decimal_number) : 十进制转二进制</span><br><span class="line">ceiling(num1)/floor() : 上下取整</span><br><span class="line">conv(num1, from_base, to_base)</span><br><span class="line">format(num1, decimal_places)</span><br><span class="line">hex(num1) : 转 16 进制</span><br><span class="line">least(num1, num2,...) </span><br><span class="line">mod(num1, denominator)</span><br><span class="line">rand(seed)</span><br><span class="line"></span><br><span class="line">-- 时间日期函数</span><br><span class="line">current_date()/current_time()/current_timestamp()</span><br><span class="line">date()</span><br><span class="line">date_add(date2, interval d_value d_type)/date_sub(): 在 date2 中加上日期或时间</span><br><span class="line">datediff(date1, date2) : 两个日期差（结果是天）</span><br><span class="line">timediff(date1, date2) : 两个时间差（多少时间多少分钟多少秒）</span><br><span class="line">now() : 当前时间</span><br><span class="line">year()|month()|date(datetime)|minute()|day()</span><br><span class="line">last_day() : 返回该日期当月最后一天</span><br><span class="line">from_unixtime() : 年月日</span><br><span class="line"></span><br><span class="line">-- 加密和系统函数</span><br><span class="line">user() : 查询用户</span><br><span class="line">database() : 数据库名称</span><br><span class="line">md5(str) : 为字符串算出 md5 32的字符串</span><br><span class="line">password(str) : 从原文 str 计算并返回密码字符</span><br><span class="line"></span><br><span class="line">-- 流程控制函数</span><br><span class="line">if(expr1, expr2, expr3) : 如果 expr1 为 true, 则返回 expr2, 否则返回 expr3</span><br><span class="line">ifnull(expr1, expr2) : 如果 expr1 不为 null, 则返回本身，否则返回 expr2</span><br><span class="line">select case when expr1 then expr2 when expr3 then expr4 else expr5 end : 如果 expr1 为 true, 则返回 expr2, 如果 expr2 为 true，返回 expr4, 否则返回 expr5</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据约束"><a href="#数据约束" class="headerlink" title="数据约束"></a>数据约束</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 五个数据约束</span><br><span class="line">primary key</span><br><span class="line">not null</span><br><span class="line">unique</span><br><span class="line">foreign key(本表字段名) references (主表名)</span><br><span class="line">check</span><br><span class="line"></span><br><span class="line"># 自增长</span><br><span class="line">auto_increment</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="细节处理"><a href="#细节处理" class="headerlink" title="细节处理"></a>细节处理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">between a and b : 包含 a 和 b</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
