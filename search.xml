@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>Java lambda 表达式</title>
+      <link href="/2021/09/02/Java-lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+      <url>/2021/09/02/Java-lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Lambda-表达式"><a href="#Lambda-表达式" class="headerlink" title="Lambda 表达式"></a>Lambda 表达式</h1><blockquote><p>函数式接口：<br>    任何接口，如果只包含一个抽象方法，那么它就是一个函数式接口。<br>    我们可以通过 Lambda 表达式来创建该接口的对象。</p></blockquote><h3 id="Lambda-简化过程"><a href="#Lambda-简化过程" class="headerlink" title="Lambda 简化过程"></a>Lambda 简化过程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Like1 like1 = <span class="keyword">new</span> Like1();</span><br><span class="line">        System.out.println(like1.getClass().getName());</span><br><span class="line">        like1.lambda();</span><br><span class="line"></span><br><span class="line">        Like2 like2 = <span class="keyword">new</span> Like2();</span><br><span class="line">        System.out.println(like2.getClass().getName());</span><br><span class="line">        like2.lambda();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 局部内部类实现 ILike 接口</span></span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Like3</span> <span class="keyword">implements</span> <span class="title">ILike</span> </span>&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lambda</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;i like lambda3&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Like3 like3 = <span class="keyword">new</span> Like3();</span><br><span class="line">        System.out.println(like3.getClass().getName());</span><br><span class="line">        like3.lambda();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4. 匿名内部类简化代码</span></span><br><span class="line">        ILike like4 = <span class="keyword">new</span> ILike() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lambda</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;i like lambda4&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        System.out.println(like4.getClass().getName());</span><br><span class="line">        like4.lambda();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5. lambda 表达式简化代码</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            继续简化：如果多个参数类型可以推导，则可以取消掉所有的返回值类型；</span></span><br><span class="line"><span class="comment">                    如果参数只有一个，可以把括号也简化掉；</span></span><br><span class="line"><span class="comment">                    如果只有一行语句，还可以把花括号简化掉；</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        ILike like5 = () -&gt; &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;i like lambda5&quot;</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">        like5.lambda();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2. 静态内部类实现 ILike 接口</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Like2</span> <span class="keyword">implements</span> <span class="title">ILike</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lambda</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;i like lambda2&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">定义一个函数式接口（任何接口，如果只包含唯一一个抽象方法，则它是一个函数式接口）</span></span><br><span class="line"><span class="comment"> 作用：</span></span><br><span class="line"><span class="comment">    1. 避免内部类定义过多；</span></span><br><span class="line"><span class="comment">    2. 属于函数式编程的概念</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ILike</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">lambda</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 定义一个实现类，实现 lambda 方法执行</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Like1</span> <span class="keyword">implements</span> <span class="title">ILike</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lambda</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;i like lambda1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java - Lambda </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java 线程状态</title>
+      <link href="/2021/09/02/Java-%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/"/>
+      <url>/2021/09/02/Java-%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Java-线程状态"><a href="#Java-线程状态" class="headerlink" title="Java 线程状态"></a>Java 线程状态</h1><p>简单分析：就绪；运行；阻塞；死亡；（通过 CPU 调度实现状态转换）</p><h3 id="JDK-1-8-文档解释"><a href="#JDK-1-8-文档解释" class="headerlink" title="JDK 1.8 文档解释"></a>JDK 1.8 文档解释</h3><ul><li>NEW：尚未启动的线程处于此状态</li><li>RUNNABLE：在 Java 虚拟机中执行的线程处于此状态</li><li>BLOCKED：被阻塞等待监视器锁定的线程处于次状态</li><li>WAITING：正在等待另一个线程执行特定动作的线程处于此状态</li><li>TIMED_WAITING：正在等待另一个线程执行动作达到指定等待时间的进程处于此状态</li><li>TERMINATED：已退出的线程处于此状态</li></ul><h3 id="线程图"><a href="#线程图" class="headerlink" title="线程图"></a>线程图</h3><p><img src="https://i.loli.net/2021/09/02/OWeTiYJ968ayEUA.png" alt="image-20210902103615719"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java - Thread </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>VSCode 集成终端自定义</title>
       <link href="/2021/08/01/VSCode-%E9%9B%86%E6%88%90%E7%BB%88%E7%AB%AF%E8%87%AA%E5%AE%9A%E4%B9%89/"/>
       <url>/2021/08/01/VSCode-%E9%9B%86%E6%88%90%E7%BB%88%E7%AB%AF%E8%87%AA%E5%AE%9A%E4%B9%89/</url>
