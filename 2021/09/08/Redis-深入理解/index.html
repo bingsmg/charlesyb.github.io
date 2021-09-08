@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"charlesyb.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Redis 深入理解参考链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;javazhiyin&#x2F;p&#x2F;13839357.html 什么是 RedisRedis（Remote Dictionary Server）是一个使用 C 语言编写的，开源的（BSD）高性能非关系型（NoSQL）的键值对数据库。 Redis 可以存储五中不同类型的值之间的映射。键的类型只能为字符串，值支持五种数据结构：  St">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 深入理解">
+<meta property="og:url" content="https://charlesyb.github.io/2021/09/08/Redis-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Charles&#39;s Blog">
+<meta property="og:description" content="Redis 深入理解参考链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;javazhiyin&#x2F;p&#x2F;13839357.html 什么是 RedisRedis（Remote Dictionary Server）是一个使用 C 语言编写的，开源的（BSD）高性能非关系型（NoSQL）的键值对数据库。 Redis 可以存储五中不同类型的值之间的映射。键的类型只能为字符串，值支持五种数据结构：  St">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/09/08/lW4xeQCRS1psDGd.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/08/8zdMhHkUNv5jcBK.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/08/8ZvD45OzrVHxeUs.png">
+<meta property="article:published_time" content="2021-09-08T00:10:38.000Z">
+<meta property="article:modified_time" content="2021-09-08T00:57:23.350Z">
+<meta property="article:author" content="Charles">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/08/lW4xeQCRS1psDGd.png">
+
+
+<link rel="canonical" href="https://charlesyb.github.io/2021/09/08/Redis-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://charlesyb.github.io/2021/09/08/Redis-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/","path":"2021/09/08/Redis-深入理解/","title":"Redis 深入理解"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Redis 深入理解 | Charles's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Charles's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">Redis 深入理解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Redis"><span class="nav-number">1.1.</span> <span class="nav-text">什么是 Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">Redis 的优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8-Redis-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E7%BC%93%E5%AD%98"><span class="nav-number">1.3.</span> <span class="nav-text">为什么要用 Redis &#x2F;为什么要用缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD"><span class="nav-number">1.3.1.</span> <span class="nav-text">高性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91"><span class="nav-number">1.3.2.</span> <span class="nav-text">高并发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8-Redis-%E8%80%8C%E4%B8%8D%E7%94%A8-map-guava-%E5%81%9A%E7%BC%93%E5%AD%98"><span class="nav-number">1.4.</span> <span class="nav-text">为什么要用 Redis 而不用 map&#x2F;guava 做缓存?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB"><span class="nav-number">1.5.</span> <span class="nav-text">Redis为什么这么快</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Redis-%E6%8C%81%E4%B9%85%E5%8C%96%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">什么是 Redis 持久化？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB%EF%BC%88Redis-DataBase%EF%BC%89"><span class="nav-number">1.6.1.</span> <span class="nav-text">RDB（Redis DataBase）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A-1"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="nav-number">1.6.1.2.</span> <span class="nav-text">缺点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF%EF%BC%88Append-only-file"><span class="nav-number">1.6.2.</span> <span class="nav-text">AOF（Append-only file)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A-2"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-1"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Charles"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Charles</p>
+  <div class="site-description" itemprop="description">不要因为走的太远，忘了我们为什么出发</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/09/08/Redis-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Charles">
+      <meta itemprop="description" content="不要因为走的太远，忘了我们为什么出发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis 深入理解
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-09-08 08:10:38 / 修改时间：08:57:23" itemprop="dateCreated datePublished" datetime="2021-09-08T08:10:38+08:00">2021-09-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Redis-深入理解"><a href="#Redis-深入理解" class="headerlink" title="Redis 深入理解"></a>Redis 深入理解</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/javazhiyin/p/13839357.html">https://www.cnblogs.com/javazhiyin/p/13839357.html</a></p>
+<h2 id="什么是-Redis"><a href="#什么是-Redis" class="headerlink" title="什么是 Redis"></a>什么是 Redis</h2><p>Redis（Remote Dictionary Server）是一个使用 C 语言编写的，开源的（BSD）<strong>高性能非关系型（NoSQL）的键值对数据库</strong>。</p>
+<p>Redis 可以存储五中不同类型的值之间的映射。键的类型只能为字符串，值支持五种数据结构：</p>
+<ol>
+<li>String（字符串）</li>
+<li>List（列表）</li>
+<li>Set（集合）</li>
+<li>Hash（哈希）</li>
+<li>ZSet（有序集合）</li>
+</ol>
+<p>与传统数据库不同的是，Redis 的数据是存在内存中的，所以读写速率非常快，因此 Redis 被广泛用于<strong>缓存</strong>方向，每秒可以处理超过 10 万次读写操作，是已知性能最快的 Key-Value DB。另外 Redis 也经常用来做<strong>分布式锁</strong>。除此之外，Redis 支持事务、持久化、LUA 脚本、LRU 驱动事件、多种集群方案。</p>
+<h2 id="Redis-的优缺点"><a href="#Redis-的优缺点" class="headerlink" title="Redis 的优缺点"></a>Redis 的优缺点</h2><h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><ol>
+<li>读写性能优异，Redis 能读的速度是 110000次/s，写的速度是 81000次/s；</li>
+<li>支持 AOF 和 RDB 两种持久化方式；</li>
+<li>支持事务，Redis 的所有操作都是原子性的。同时 Redis 还支持对几个操作合并后的原子性执行；</li>
+<li>数据结构丰富，List，String，Hash，Set，Zset；</li>
+<li>支持<strong>主从复制</strong>，主机会自动将数据同步到从机，<strong>可以进行读写分离</strong>；</li>
+</ol>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li>数据库容量收到物理内存的限制，不能用作海量数据的高性能读写，因此 Redis 适合的场景主要局限在较小数据量的高性能操作和运算上；</li>
+<li>Redis 不具备自动容错和恢复功能，主机从机的宕机都会导致前端部分读写请求失败，需要等待机器重启或手动切换前端的 IP 才能恢复；</li>
+<li>主机宕机，宕机前有部分数据未能及时同步到从机，切换 IP 后还会引入数据不一致问题，降低系统的可用性；</li>
+<li>Redis 较难支持在线扩容，在集群容量达到上限时在线扩容会变得很复杂。为避免这一问题，运维人员在系统上线时必须确保有足够的空间，这对资源造成很大浪费；</li>
+</ol>
+<h2 id="为什么要用-Redis-为什么要用缓存"><a href="#为什么要用-Redis-为什么要用缓存" class="headerlink" title="为什么要用 Redis /为什么要用缓存"></a>为什么要用 Redis /为什么要用缓存</h2><p>主要从“高性能”和“高并发”这两点来看待这个问题。</p>
+<h3 id="高性能"><a href="#高性能" class="headerlink" title="高性能"></a>高性能</h3><p>假如用户第一次访问数据库中的某些数据。这个过程会比较慢，因为是从硬盘上读取的。将该用户访问的数据存在数缓存中，这样下一次再访问这些数据的时候就可以直接从缓存中获取了。操作缓存就是直接操作内存，所以速度相当快。如果数据库中的对应数据改变的之后，同步改变缓存中相应的数据即可！</p>
+<p><img src="https://i.loli.net/2021/09/08/lW4xeQCRS1psDGd.png" alt="Redis 常见面试题（2020最新版）"></p>
+<h3 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h3><p>直接操作缓存能够承受的请求是远远大于直接访问数据库的，所以我们可以考虑把数据库中的部分数据转移到缓存中去，这样用户的一部分请求会直接到缓存这里而不用经过数据库。</p>
+<p><img src="https://i.loli.net/2021/09/08/8zdMhHkUNv5jcBK.png" alt="Redis 常见面试题（2020最新版）"></p>
+<h2 id="为什么要用-Redis-而不用-map-guava-做缓存"><a href="#为什么要用-Redis-而不用-map-guava-做缓存" class="headerlink" title="为什么要用 Redis 而不用 map/guava 做缓存?"></a>为什么要用 Redis 而不用 map/guava 做缓存?</h2><p>缓存分为本地缓存和分布式缓存。以 Java 为例，使用自带的 map 或者 guava 实现的是<strong>本地缓存</strong>，最主要的特点是轻量以及快速，生命周期随着 jvm 的销毁而结束，并且在<strong>多实例的情况下，每个实例都需要各自保存一份缓存，缓存不具有一致性</strong>。</p>
+<p>使用 Redis 或 Memcached 之类的称为<strong>分布式缓存</strong>，在多实例的情况下，各实例共用一份缓存数据，<strong>缓存具有一致性</strong>。缺点是需要保持 Redis 或 Memcached 服务的高可用，整个程序架构上较为复杂。</p>
+<h2 id="Redis为什么这么快"><a href="#Redis为什么这么快" class="headerlink" title="Redis为什么这么快"></a>Redis为什么这么快</h2><ol>
+<li>完全基于内存，绝大部分请求时纯粹的内存操作，非常快速。数据在内存中的优势就是查找和操作的时间复杂度很低；</li>
+<li>数据结构简单，对数据操作也简单，Redis 的数据结构时专门进行设计的；</li>
+<li>采用<strong>单线程</strong>，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU，不用考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗；</li>
+<li>使用多路 I/O 复用模型，非阻塞 IO；</li>
+<li>使用的底层模型不容，他们之间的底层实现方式以及客户端之间通信的应用协议不一样，Redis 直接自己构建了 VM 机制，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求；</li>
+</ol>
+<h2 id="什么是-Redis-持久化？"><a href="#什么是-Redis-持久化？" class="headerlink" title="什么是 Redis 持久化？"></a>什么是 Redis 持久化？</h2><p>持久化机制就是把内存的数据写入到磁盘中去，防止服务宕机了内存数据丢失。Redis 提供两种持久化机制 <strong>RDB（默认）</strong> 和 <strong>AOF</strong> 机制。</p>
+<h3 id="RDB（Redis-DataBase）"><a href="#RDB（Redis-DataBase）" class="headerlink" title="RDB（Redis DataBase）"></a>RDB（Redis DataBase）</h3><p>RDB 是Redis 的默认的持久化方式。按照一定的时间将内存中的数据以快照的形式保存到硬盘中，对应的产生的数据文件为 dump.rdb。通过配置文件中的 save 参数来定义快照的周期。</p>
+<h4 id="优点：-1"><a href="#优点：-1" class="headerlink" title="优点："></a>优点：</h4><ol>
+<li>只有一个 dump.rdb，方便持久化；</li>
+<li>容灾性好，一个文件可以保存到安全的磁盘；</li>
+<li>性能最大化，fork 子进程来完成写操作，让主进程继续处理命令，所以是 IO 最大化。使用单独的子进程来进行持久化，主进程不会进行任何的 IO 操作，保证了 Redis 的高性能；</li>
+<li>相对于大数据集时，比 AOF 的启动效率更高。</li>
+</ol>
+<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><ol>
+<li>数据安全性较低。RDB 是间隔一段时间进行持久化，如果持久化之间 Redis 发生故障，会发生数据丢失。所以这种方式更适合数据要求不严谨的时候；</li>
+<li>AOF 持久化方式，是指所有的命令行记录以 Redis 命令请求协议的格式完全持久化存储 保存为 aof 文件。</li>
+</ol>
+<h3 id="AOF（Append-only-file"><a href="#AOF（Append-only-file" class="headerlink" title="AOF（Append-only file)"></a>AOF（Append-only file)</h3><p>是将 Redis 执行的每次写命令记录到单独的日志文件中，当重启Redis会重新将持久化的日志中文件恢复数据。</p>
+<p><img src="https://i.loli.net/2021/09/08/8ZvD45OzrVHxeUs.png" alt="img"></p>
+<h4 id="优点：-2"><a href="#优点：-2" class="headerlink" title="优点："></a>优点：</h4><ol>
+<li>数据安全，AOF 持久化可以配置 appendfsync 属性，有 always，每进行一次命令操作就记录到 aof 文件中一次；</li>
+<li>通过 append 模式写文件，即使中途服务器宕机，可以通过 redis-check-aof 工具解决数据一致性问题；</li>
+<li>AOF 机制的 rewrite 模式。AOF 文件没被 rewrite 之前（文件过大时会对命令进行合并重写，可以删除其中的一些命令）；</li>
+</ol>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li>AOF 文件比 RDB 文件大，且恢复速度慢；</li>
+<li>数据集大的时候，比 RDB 启动效率低；</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Charles
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://charlesyb.github.io/2021/09/08/Redis-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/" title="Redis 深入理解">https://charlesyb.github.io/2021/09/08/Redis-深入理解/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/07/Java-%E6%B3%A8%E8%A7%A3/" rel="prev" title="Java 注解">
+                  <i class="fa fa-chevron-left"></i> Java 注解
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/08/%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93/" rel="next" title="面经积累">
+                  面经积累 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">32k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">29 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

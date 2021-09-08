@@ -84,8 +84,8 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,20 +157,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -201,6 +201,341 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/08/01/Mysql5-7-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Charles">
+      <meta itemprop="description" content="不要因为走的太远，忘了我们为什么出发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/01/Mysql5-7-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">Mysql5.7 安装配置教程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-08-01 17:23:35 / 修改时间：17:45:18" itemprop="dateCreated datePublished" datetime="2021-08-01T17:23:35+08:00">2021-08-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">环境配置</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>816</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="MYSQL5-7-安装及初始化配置"><a href="#MYSQL5-7-安装及初始化配置" class="headerlink" title="MYSQL5.7 安装及初始化配置"></a>MYSQL5.7 安装及初始化配置</h2><h4 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h4><ol>
+<li>官网下载安装==压缩包==：<br><a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">Download MySQL</a></li>
+<li>解压到要安装的目录，解压完成后进入目录，复制绝对路径。</li>
+</ol>
+<h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><ol>
+<li>将复制的环境变量，添加到系统 <strong>path</strong> 里面。</li>
+</ol>
+<h4 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h4><ol>
+<li><p>在解压目录下（和bin目录同级）下新建 <strong>my.ini</strong> 文件，配置以下语句：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="attr">basedir</span>=D:\Program Files\MySQL\mysql-<span class="number">5.7</span>.<span class="number">33</span>-winx64\</span><br><span class="line"><span class="attr">datadir</span>=D:\Program Files\MySQL\mysql-<span class="number">5.7</span>.<span class="number">33</span>-winx64\data</span><br><span class="line"><span class="attr">port</span>=<span class="number">3306</span></span><br><span class="line">skip-grant-tables</span><br></pre></td></tr></table></figure>
+
+<p>解析：</p>
+<p>basedir：你的mysql解压根目录（带最后的 ****）    </p>
+<p>datadir：你的根目录\data（不用新建，会自动生成）</p>
+<p>最下面一句配置完成得注释，后面说</p>
+</li>
+<li><p>管理员命令打开命令行，可以在mysql根目录下按住shift+鼠标右键查看打开；</p>
+</li>
+<li><p>进入mysql的bin目录，执行以下语句安装服务；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld -install</span><br></pre></td></tr></table></figure></li>
+<li><p>执行以下语句加载my.ini文件，进行初始配置，完成后生成data文件夹；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --initialize-insecure --user=mysql</span><br></pre></td></tr></table></figure></li>
+<li><p>执行以下语句启动mysql服务；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start mysql</span><br></pre></td></tr></table></figure></li>
+<li><p>连接数据库，并修改密码，执行以下语句；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<p>执行完成后要求输入密码，<strong>（什么都别输入）</strong>，直接回车，成功连接进入mysql后修改密码，执行以下语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">updata mysql.user <span class="keyword">set</span> authentication_string<span class="operator">=</span>password(<span class="string">&#x27;123456&#x27;</span>) <span class="keyword">where</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span> <span class="keyword">and</span> Host<span class="operator">=</span><span class="string">&#x27;localhost&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>执行完刷新权限：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></li>
+<li><p>最后完成后打开my.ini文件，注释最后一行，前面加 # 来注释一行。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/07/21/NexT%E4%B8%BB%E9%A2%98%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Charles">
+      <meta itemprop="description" content="不要因为走的太远，忘了我们为什么出发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/21/NexT%E4%B8%BB%E9%A2%98%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">NexT主题进阶配置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-21 22:32:08" itemprop="dateCreated datePublished" datetime="2021-07-21T22:32:08+08:00">2021-07-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-01 17:47:14" itemprop="dateModified" datetime="2021-08-01T17:47:14+08:00">2021-08-01</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%8D%9A%E5%AE%A2%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">博客系列</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>841</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="NexT-进阶配置"><a href="#NexT-进阶配置" class="headerlink" title="NexT 进阶配置"></a>NexT 进阶配置</h1><h3 id="顶部黑条"><a href="#顶部黑条" class="headerlink" title="顶部黑条"></a>顶部黑条</h3><p>位置：source/css/_variiables/base.styl ，大概在 200 行附近 <code>headband-bg</code> 和 <code>headband-height</code> 配置高度和背景色，<strong>transparent</strong> 表示透明。</p>
+<h3 id="商标背景"><a href="#商标背景" class="headerlink" title="商标背景"></a>商标背景</h3><p>site-brand-container 在 source/css/_common/outline/header/index.styl 设置 <code>background-image: url(/images/brand-background.jpg)!important;</code></p>
+<h3 id="页面圆角配置"><a href="#页面圆角配置" class="headerlink" title="页面圆角配置"></a>页面圆角配置</h3><p>css/_variables/Genini.styl 里最后追加</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$border</span>-radius-inner = <span class="number">10px</span> <span class="number">10px</span> <span class="number">10px</span> <span class="number">10px</span></span><br><span class="line"><span class="variable">$border</span>-radius = <span class="number">10px</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="页面链接样式配置"><a href="#页面链接样式配置" class="headerlink" title="页面链接样式配置"></a>页面链接样式配置</h3><p>在 styles.styl 文件里</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 修改链接样式</span><br><span class="line"><span class="selector-class">.post-body</span> <span class="selector-tag">p</span> <span class="selector-tag">a</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#0593d3</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: none;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#ff106c</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span>, <span class="selector-tag">span</span><span class="selector-class">.exturl</span> &#123;</span><br><span class="line">  <span class="attribute">border-bottom</span>: none;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#ff106c</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="文章阴影透明度调整"><a href="#文章阴影透明度调整" class="headerlink" title="文章阴影透明度调整"></a>文章阴影透明度调整</h3><p>在 styles.styl 里添加</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//博客内容透明化</span><br><span class="line">//文章内容的透明度设置</span><br><span class="line"><span class="selector-class">.content-wrap</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.85</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//侧边框的透明度设置</span><br><span class="line"><span class="selector-class">.sidebar</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.85</span>;</span><br><span class="line">&#125;</span><br><span class="line">//菜单栏的透明度设置</span><br><span class="line"><span class="selector-class">.header-inner</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0.85</span>);</span><br><span class="line">&#125;</span><br><span class="line">//搜索框（local-search）的透明度设置</span><br><span class="line"><span class="selector-class">.popup</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.85</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/07/13/Typora%E9%87%8C%E6%90%AD%E5%BB%BA%E4%B8%83%E7%89%9B%E5%9B%BE%E5%BA%8A%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Charles">
+      <meta itemprop="description" content="不要因为走的太远，忘了我们为什么出发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/13/Typora%E9%87%8C%E6%90%AD%E5%BB%BA%E4%B8%83%E7%89%9B%E5%9B%BE%E5%BA%8A%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/" class="post-title-link" itemprop="url">Typora里搭建七牛图床自动上传图片</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-13 22:40:21" itemprop="dateCreated datePublished" datetime="2021-07-13T22:40:21+08:00">2021-07-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-01 17:47:04" itemprop="dateModified" datetime="2021-08-01T17:47:04+08:00">2021-08-01</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%8D%9A%E5%AE%A2%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">博客系列</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>181</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Typora里搭建七牛图床自动上传图片"><a href="#Typora里搭建七牛图床自动上传图片" class="headerlink" title="Typora里搭建七牛图床自动上传图片"></a>Typora里搭建七牛图床自动上传图片</h1><h3 id="一、配置七牛云存储空间"><a href="#一、配置七牛云存储空间" class="headerlink" title="一、配置七牛云存储空间"></a>一、配置七牛云存储空间</h3><h3 id="二、下载配置PicGo"><a href="#二、下载配置PicGo" class="headerlink" title="二、下载配置PicGo"></a>二、下载配置PicGo</h3><ol>
+<li>安装完成配置七牛图床</li>
+<li>复制七牛云里的 AK(AccessKey)，SK(SecretKey)</li>
+<li>找到七牛云里创建的存储空间复制外链域名到设定访问网址</li>
+<li>复制存储空间</li>
+<li>存储区域选择七牛云存储空间的配置文件里，存储区域对应的键<ol>
+<li><a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Doc/zh/guide/config.html#%E4%B8%83%E7%89%9B%E5%9B%BE%E5%BA%8A">配置手册|PicGo</a></li>
+</ol>
+</li>
+</ol>
+<h3 id="三、Typora里配置PicGo路径"><a href="#三、Typora里配置PicGo路径" class="headerlink" title="三、Typora里配置PicGo路径"></a>三、Typora里配置PicGo路径</h3><h3 id="四、复制上传成功"><a href="#四、复制上传成功" class="headerlink" title="四、复制上传成功"></a>四、复制上传成功</h3>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -353,14 +688,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">15k</span>
+    <span title="站点总字数">32k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">13 分钟</span>
+    <span title="站点阅读时长">29 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
