@@ -20,28 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"charlesyb.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Typora里搭建七牛图床自动上传图片一、配置七牛云存储空间二、下载配置PicGo 安装完成配置七牛图床 复制七牛云里的 AK(AccessKey)，SK(SecretKey) 找到七牛云里创建的存储空间复制外链域名到设定访问网址 复制存储空间 存储区域选择七牛云存储空间的配置文件里，存储区域对应的键 配置手册|PicGo    三、Typora里配置PicGo路径四、复制上传成功">
+<meta name="description" content="茄子科技一面 自我介绍 HashMap 底层机制（数组链表红黑树，以及一些细节），如果需要有序呢？（LinkedHashMap）如果需要按照大小呢？（TreeMap） MySQL 事务隔离级别？默认隔离级别呢？他们之间的区别呢？会引起什么问题呢？ MySQL 索引机制，InnoDB 引擎使用的聚簇索引，然后 B+ 树？ MySQL SQL语句查询慢，你是如何排查的，什么命令？一个啥来着 查询日志的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Typora里搭建七牛图床自动上传图片">
-<meta property="og:url" content="https://charlesyb.github.io/2021/07/13/Typora%E9%87%8C%E6%90%AD%E5%BB%BA%E4%B8%83%E7%89%9B%E5%9B%BE%E5%BA%8A%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/index.html">
+<meta property="og:title" content="面经">
+<meta property="og:url" content="https://charlesyb.github.io/2021/09/12/%E9%9D%A2%E7%BB%8F/index.html">
 <meta property="og:site_name" content="Charles&#39;s Blog">
-<meta property="og:description" content="Typora里搭建七牛图床自动上传图片一、配置七牛云存储空间二、下载配置PicGo 安装完成配置七牛图床 复制七牛云里的 AK(AccessKey)，SK(SecretKey) 找到七牛云里创建的存储空间复制外链域名到设定访问网址 复制存储空间 存储区域选择七牛云存储空间的配置文件里，存储区域对应的键 配置手册|PicGo    三、Typora里配置PicGo路径四、复制上传成功">
+<meta property="og:description" content="茄子科技一面 自我介绍 HashMap 底层机制（数组链表红黑树，以及一些细节），如果需要有序呢？（LinkedHashMap）如果需要按照大小呢？（TreeMap） MySQL 事务隔离级别？默认隔离级别呢？他们之间的区别呢？会引起什么问题呢？ MySQL 索引机制，InnoDB 引擎使用的聚簇索引，然后 B+ 树？ MySQL SQL语句查询慢，你是如何排查的，什么命令？一个啥来着 查询日志的">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-13T14:40:21.000Z">
-<meta property="article:modified_time" content="2021-08-01T09:47:04.170Z">
+<meta property="article:published_time" content="2021-09-12T10:15:19.000Z">
+<meta property="article:modified_time" content="2021-09-12T10:15:55.571Z">
 <meta property="article:author" content="Charles">
-<meta property="article:tag" content="图床">
+<meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://charlesyb.github.io/2021/07/13/Typora%E9%87%8C%E6%90%AD%E5%BB%BA%E4%B8%83%E7%89%9B%E5%9B%BE%E5%BA%8A%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/">
+<link rel="canonical" href="https://charlesyb.github.io/2021/09/12/%E9%9D%A2%E7%BB%8F/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://charlesyb.github.io/2021/07/13/Typora%E9%87%8C%E6%90%AD%E5%BB%BA%E4%B8%83%E7%89%9B%E5%9B%BE%E5%BA%8A%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/","path":"2021/07/13/Typora里搭建七牛图床自动上传图片/","title":"Typora里搭建七牛图床自动上传图片"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://charlesyb.github.io/2021/09/12/%E9%9D%A2%E7%BB%8F/","path":"2021/09/12/面经/","title":"面经"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Typora里搭建七牛图床自动上传图片 | Charles's Blog</title>
+<title>面经 | Charles's Blog</title>
   
 
 
@@ -50,7 +50,119 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
-</head>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -145,7 +257,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Typora%E9%87%8C%E6%90%AD%E5%BB%BA%E4%B8%83%E7%89%9B%E5%9B%BE%E5%BA%8A%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87"><span class="nav-number">1.</span> <span class="nav-text">Typora里搭建七牛图床自动上传图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%85%8D%E7%BD%AE%E4%B8%83%E7%89%9B%E4%BA%91%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、配置七牛云存储空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%B8%8B%E8%BD%BD%E9%85%8D%E7%BD%AEPicGo"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、下载配置PicGo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81Typora%E9%87%8C%E9%85%8D%E7%BD%AEPicGo%E8%B7%AF%E5%BE%84"><span class="nav-number">1.0.3.</span> <span class="nav-text">三、Typora里配置PicGo路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%A4%8D%E5%88%B6%E4%B8%8A%E4%BC%A0%E6%88%90%E5%8A%9F"><span class="nav-number">1.0.4.</span> <span class="nav-text">四、复制上传成功</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8C%84%E5%AD%90%E7%A7%91%E6%8A%80%E4%B8%80%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">茄子科技一面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%94%E8%99%8E%E5%85%BB%E8%BD%A6%E4%B8%80%E9%9D%A2"><span class="nav-number">2.</span> <span class="nav-text">途虎养车一面</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -215,7 +327,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/07/13/Typora%E9%87%8C%E6%90%AD%E5%BB%BA%E4%B8%83%E7%89%9B%E5%9B%BE%E5%BA%8A%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/">
+    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/09/12/%E9%9D%A2%E7%BB%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -228,7 +340,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Typora里搭建七牛图床自动上传图片
+          面经
         </h1>
 
         <div class="post-meta-container">
@@ -238,23 +350,21 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2021-07-13 22:40:21" itemprop="dateCreated datePublished" datetime="2021-07-13T22:40:21+08:00">2021-07-13</time>
+      <time title="创建时间：2021-09-12 18:15:19 / 修改时间：18:15:55" itemprop="dateCreated datePublished" datetime="2021-09-12T18:15:19+08:00">2021-09-12</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-01 17:47:04" itemprop="dateModified" datetime="2021-08-01T17:47:04+08:00">2021-08-01</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%8D%9A%E5%AE%A2%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">博客系列</span></a>
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/%E9%9D%A2%E7%BB%8F/" itemprop="url" rel="index"><span itemprop="name">面经</span></a>
         </span>
     </span>
 
@@ -273,7 +383,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>181</span>
+      <span>705</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -291,17 +401,40 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="Typora里搭建七牛图床自动上传图片"><a href="#Typora里搭建七牛图床自动上传图片" class="headerlink" title="Typora里搭建七牛图床自动上传图片"></a>Typora里搭建七牛图床自动上传图片</h1><h3 id="一、配置七牛云存储空间"><a href="#一、配置七牛云存储空间" class="headerlink" title="一、配置七牛云存储空间"></a>一、配置七牛云存储空间</h3><h3 id="二、下载配置PicGo"><a href="#二、下载配置PicGo" class="headerlink" title="二、下载配置PicGo"></a>二、下载配置PicGo</h3><ol>
-<li>安装完成配置七牛图床</li>
-<li>复制七牛云里的 AK(AccessKey)，SK(SecretKey)</li>
-<li>找到七牛云里创建的存储空间复制外链域名到设定访问网址</li>
-<li>复制存储空间</li>
-<li>存储区域选择七牛云存储空间的配置文件里，存储区域对应的键<ol>
-<li><a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Doc/zh/guide/config.html#%E4%B8%83%E7%89%9B%E5%9B%BE%E5%BA%8A">配置手册|PicGo</a></li>
+        <h1 id="茄子科技一面"><a href="#茄子科技一面" class="headerlink" title="茄子科技一面"></a>茄子科技一面</h1><ol>
+<li>自我介绍</li>
+<li>HashMap 底层机制（数组链表红黑树，以及一些细节），如果需要有序呢？（LinkedHashMap）如果需要按照大小呢？（TreeMap）</li>
+<li>MySQL 事务隔离级别？默认隔离级别呢？他们之间的区别呢？会引起什么问题呢？</li>
+<li>MySQL 索引机制，InnoDB 引擎使用的聚簇索引，然后 B+ 树？</li>
+<li>MySQL SQL语句查询慢，你是如何排查的，什么命令？一个啥来着</li>
+<li>查询日志的最后的几行日志文件，使用的是什么命令（tail），查询前几行的命令呢？</li>
+<li>双亲委派机制说一下？类加载具体说一说？</li>
+<li>GC 了解过吗？说一说算法？</li>
+<li>堆呢？比如我现在有一个大的对象，应该存放在什么地方？（老年区）</li>
+<li>现在有一组线程，我想让他们一起执行，应该使用什么方法？（CountDownLatch）</li>
+<li>Java 锁机制了解多少？读写锁说一下？</li>
+<li>Lock 锁和 Synchronize 关键字的区别？</li>
+<li>有一个计数变量，来统计多个线程，怎么操作？CAS，CAS 的不好的地方？</li>
+<li>Redis 记录一个 UV 的话，用什么数据结构，啥 BitMap还有啥啥的</li>
+<li>Volatile 关键字说一下，以及它的作用？</li>
+<li>Spring 了解多少？Spring 框架用了哪些设计模式，单例模式说一下都有啥？</li>
+<li>ConcurrentHashMap？与 HashMap 的区别，底层怎么实现的？</li>
 </ol>
+<h1 id="途虎养车一面"><a href="#途虎养车一面" class="headerlink" title="途虎养车一面"></a>途虎养车一面</h1><ol>
+<li><p>Redis 的数据结构？list 结构一般用于什么场景？</p>
+</li>
+<li><p>LinkedHashMap 一般用在什么场景？</p>
+</li>
+<li><p>Zookeeper 你了解多少？用它来做什么？底层机制了解过吗？</p>
+</li>
+<li><p>JVM 了解多少？说一下，就把类加载和运行时数据区都说了一下</p>
+</li>
+<li><p>一道编程题，合并两个有序链表</p>
+</li>
+<li><p>Mysql 事务隔离级别，以及会引起什么问题？可串行化级别一般使用在什么场景？</p>
 </li>
 </ol>
-<h3 id="三、Typora里配置PicGo路径"><a href="#三、Typora里配置PicGo路径" class="headerlink" title="三、Typora里配置PicGo路径"></a>三、Typora里配置PicGo路径</h3><h3 id="四、复制上传成功"><a href="#四、复制上传成功" class="headerlink" title="四、复制上传成功"></a>四、复制上传成功</h3>
+
     </div>
 
     
@@ -318,7 +451,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://charlesyb.github.io/2021/07/13/Typora%E9%87%8C%E6%90%AD%E5%BB%BA%E4%B8%83%E7%89%9B%E5%9B%BE%E5%BA%8A%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/" title="Typora里搭建七牛图床自动上传图片">https://charlesyb.github.io/2021/07/13/Typora里搭建七牛图床自动上传图片/</a>
+      <a href="https://charlesyb.github.io/2021/09/12/%E9%9D%A2%E7%BB%8F/" title="面经">https://charlesyb.github.io/2021/09/12/面经/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -327,21 +460,18 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E5%9B%BE%E5%BA%8A/" rel="tag"><i class="fa fa-tag"></i> 图床</a>
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag"><i class="fa fa-tag"></i> 面经</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/07/13/Mysql-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="Mysql 学习笔记">
-                  <i class="fa fa-chevron-left"></i> Mysql 学习笔记
+                <a href="/2021/09/10/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="prev" title="函数式编程">
+                  <i class="fa fa-chevron-left"></i> 函数式编程
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/07/21/NexT%E4%B8%BB%E9%A2%98%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE/" rel="next" title="NexT主题进阶配置">
-                  NexT主题进阶配置 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
