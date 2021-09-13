@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>List 和 Array 的互相转化</title>
+      <link href="/2021/09/13/List-%E5%92%8C-Array-%E7%9A%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E5%8C%96/"/>
+      <url>/2021/09/13/List-%E5%92%8C-Array-%E7%9A%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E5%8C%96/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Java-中-List-和-Array-的相互转换"><a href="#Java-中-List-和-Array-的相互转换" class="headerlink" title="Java 中 List 和 Array 的相互转换"></a>Java 中 List 和 Array 的相互转换</h1><h2 id="List-转-Array"><a href="#List-转-Array" class="headerlink" title="List 转 Array"></a>List 转 Array</h2><p>直接调用  <code>list.toArray()</code> 转换为 Object 数组，但是存在强制类型转换异常，所以一般推荐使用如下方式；</p><h2 id="Array-转-List"><a href="#Array-转-List" class="headerlink" title="Array 转 List"></a>Array 转 List</h2><p>调用 <code>Arrays.asList()</code> ，但是此方法生成的是 Arrays 的一个内部类，未实现 add，remove 等方法，所以一般推荐使用方式如下；</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; a = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        a.add(<span class="number">1</span>);</span><br><span class="line">        a.add(<span class="number">2</span>);</span><br><span class="line">        Integer[] c = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>};</span><br><span class="line"><span class="comment">// 不推荐：这种方式容易发生类型转换异常</span></span><br><span class="line">Object[] objects = a.toArray();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 推荐</span></span><br><span class="line">        Integer[] integers = a.toArray(<span class="keyword">new</span> Integer[a.size()]);</span><br><span class="line">        <span class="keyword">for</span> (Integer integer : integers) {</span><br><span class="line">            System.out.println(integer);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 不推荐：此方法生成的 integers 是一个内部类，没有 add,remove 方法</span></span><br><span class="line">        List&lt;Integer&gt; integers1 = Arrays.asList(c);</span><br><span class="line">        <span class="keyword">for</span> (Integer integer : integers1) {</span><br><span class="line">            System.out.println(integer);</span><br><span class="line">        }</span><br><span class="line"><span class="comment">// 推荐</span></span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(Arrays.asList(c));</span><br><span class="line">        <span class="keyword">for</span> (Integer re : res) {</span><br><span class="line">            System.out.println(re);</span><br><span class="line">        }</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+          <category> 集合 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>面经</title>
       <link href="/2021/09/12/%E9%9D%A2%E7%BB%8F/"/>
       <url>/2021/09/12/%E9%9D%A2%E7%BB%8F/</url>
