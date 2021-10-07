@@ -269,7 +269,7 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -306,6 +306,8 @@ mjx-container[display="true"] + br {
     <span>0%</span>
   </div>
   <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CharlesYb" class="github-corner" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -389,11 +391,45 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Java-中-List-和-Array-的相互转换"><a href="#Java-中-List-和-Array-的相互转换" class="headerlink" title="Java 中 List 和 Array 的相互转换"></a>Java 中 List 和 Array 的相互转换</h1><h2 id="List-转-Array"><a href="#List-转-Array" class="headerlink" title="List 转 Array"></a>List 转 Array</h2><p>直接调用  <code>list.toArray()</code> 转换为 Object 数组，但是存在强制类型转换异常，所以一般推荐使用如下方式；</p>
-<h2 id="Array-转-List"><a href="#Array-转-List" class="headerlink" title="Array 转 List"></a>Array 转 List</h2><p>调用 <code>Arrays.asList()</code> ，但是此方法生成的是 Arrays 的一个内部类，未实现 add，remove 等方法，所以一般推荐使用方式如下；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; a = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        a.add(<span class="number">1</span>);</span><br><span class="line">        a.add(<span class="number">2</span>);</span><br><span class="line">        Integer[] c = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>};</span><br><span class="line">		<span class="comment">// 不推荐：这种方式容易发生类型转换异常</span></span><br><span class="line">		Object[] objects = a.toArray();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 推荐</span></span><br><span class="line">        Integer[] integers = a.toArray(<span class="keyword">new</span> Integer[a.size()]);</span><br><span class="line">        <span class="keyword">for</span> (Integer integer : integers) {</span><br><span class="line">            System.out.println(integer);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 不推荐：此方法生成的 integers 是一个内部类，没有 add,remove 方法</span></span><br><span class="line">        List&lt;Integer&gt; integers1 = Arrays.asList(c);</span><br><span class="line">        <span class="keyword">for</span> (Integer integer : integers1) {</span><br><span class="line">            System.out.println(integer);</span><br><span class="line">        }</span><br><span class="line">		<span class="comment">// 推荐</span></span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(Arrays.asList(c));</span><br><span class="line">        <span class="keyword">for</span> (Integer re : res) {</span><br><span class="line">            System.out.println(re);</span><br><span class="line">        }</span><br></pre></td></tr></table></figure>
+          Java 中 List 和 Array 的相互转换
+List 转 Array
+直接调用 list.toArray() 转换为 Object 数组，但是存在强制类型转换异常，所以一般推荐使用如下方式；
+
+Array 转 List
+调用 Arrays.asList() ，但是此方法生成的是 Arrays 的一个内部类，未实现 add，remove 等方法，所以一般推荐使用方式如下；
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
 
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/13/List-%E5%92%8C-Array-%E7%9A%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E5%8C%96/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -450,7 +486,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-09-13 15:29:15" itemprop="dateModified" datetime="2021-09-13T15:29:15+08:00">2021-09-13</time>
+        <time title="修改时间：2021-09-14 13:41:51" itemprop="dateModified" datetime="2021-09-14T13:41:51+08:00">2021-09-14</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -474,7 +510,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>721</span>
+      <span>730</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -492,41 +528,21 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="茄子科技一面"><a href="#茄子科技一面" class="headerlink" title="茄子科技一面"></a>茄子科技一面</h1><ol>
-<li>自我介绍</li>
-<li>HashMap 底层机制（数组链表红黑树，以及一些细节），如果需要有序呢？（LinkedHashMap）如果需要按照大小呢？（TreeMap）</li>
-<li>MySQL 事务隔离级别？默认隔离级别呢？他们之间的区别呢？会引起什么问题呢？</li>
-<li>MySQL 索引机制，InnoDB 引擎使用的聚簇索引，然后 B+ 树？</li>
-<li>MySQL SQL语句查询慢，你是如何排查的，什么命令？一个啥来着</li>
-<li>查询日志的最后的几行日志文件，使用的是什么命令（tail），查询前几行的命令呢？</li>
-<li>双亲委派机制说一下？类加载具体说一说？</li>
-<li>GC 了解过吗？说一说算法？</li>
-<li>堆呢？比如我现在有一个大的对象，应该存放在什么地方？（老年区）</li>
-<li>现在有一组线程，我想让他们一起执行，应该使用什么方法？（CountDownLatch）</li>
-<li>Java 锁机制了解多少？读写锁说一下？</li>
-<li>Lock 锁和 Synchronize 关键字的区别？</li>
-<li>有一个计数变量，来统计多个线程，怎么操作？CAS，CAS 的不好的地方？</li>
-<li>Redis 记录一个 UV 的话，用什么数据结构，啥 BitMap还有啥啥的</li>
-<li>Volatile 关键字说一下，以及它的作用？</li>
-<li>Spring 了解多少？Spring 框架用了哪些设计模式，单例模式说一下都有啥？</li>
-<li>ConcurrentHashMap？与 HashMap 的区别，底层怎么实现的？</li>
-<li>Spring 里面 Bean 的作用域</li>
-</ol>
-<h1 id="途虎养车一面"><a href="#途虎养车一面" class="headerlink" title="途虎养车一面"></a>途虎养车一面</h1><ol>
-<li><p>Redis 的数据结构？list 结构一般用于什么场景？</p>
-</li>
-<li><p>LinkedHashMap 一般用在什么场景？</p>
-</li>
-<li><p>Zookeeper 你了解多少？用它来做什么？底层机制了解过吗？</p>
-</li>
-<li><p>JVM 了解多少？说一下，就把类加载和运行时数据区都说了一下</p>
-</li>
-<li><p>一道编程题，合并两个有序链表</p>
-</li>
-<li><p>Mysql 事务隔离级别，以及会引起什么问题？可串行化级别一般使用在什么场景？</p>
-</li>
-</ol>
-
+          茄子科技一面
+ 1.  自我介绍
+ 2.  HashMap 底层机制（数组链表红黑树，以及一些细节），如果需要有序呢？（LinkedHashMap）如果需要按照大小呢？（TreeMap）
+ 3.  MySQL 事务隔离级别？默认隔离级别呢？他们之间的区别呢？会引起什么问题呢？
+ 4.  MySQL 索引机制，InnoDB 引擎使用的聚簇索引，然后 B+ 树？
+ 5.  MySQL SQL语句查询慢，你是如何排查的，什么命令？(explain) 一个啥来着
+ 6.  查询日志的最后的几行日志文件，
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/12/%E9%9D%A2%E7%BB%8F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -619,21 +635,42 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h1><p>函数式接口都可以使用 Lambda 表达式简化，提高开发效率。</p>
-<p>以下为四大函数式原生接口。</p>
-<h2 id="函数式接口-Function"><a href="#函数式接口-Function" class="headerlink" title="函数式接口 Function"></a>函数式接口 Function</h2><p>有一个输入参数，一个输出参数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Function</span>&lt;<span class="title">T</span>, <span class="title">R</span>&gt; </span>{</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Applies this function to the given argument.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> t the function argument</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the function result</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">R <span class="title">apply</span><span class="params">(T t)</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+          函数式编程
+函数式接口都可以使用 Lambda 表达式简化，提高开发效率。
 
-<h2 id="断定型接口-Predicate"><a href="#断定型接口-Predicate" class="headerlink" title="断定型接口 Predicate"></a>断定型接口 Predicate</h2><p>一个输入参数，返回 Boolean 值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Predicate</span>&lt;<span class="title">T</span>&gt; </span>{</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Evaluates this predicate on the given argument.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> t the input argument</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> {<span class="doctag">@code</span> true} if the input argument matches the predicate,</span></span><br><span class="line"><span class="comment">     * otherwise {<span class="doctag">@code</span> false}</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">test</span><span class="params">(T t)</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+以下为四大函数式原生接口。
 
-<h2 id="供给型接口-Supplier"><a href="#供给型接口-Supplier" class="headerlink" title="供给型接口 Supplier"></a>供给型接口 Supplier</h2><p>没有参数，只有返回值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Supplier</span>&lt;<span class="title">T</span>&gt; </span>{</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Gets a result.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> a result</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">T <span class="title">get</span><span class="params">()</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+函数式接口 Function
+有一个输入参数，一个输出参数
 
-<h2 id="消费型接口-Consumer"><a href="#消费型接口-Consumer" class="headerlink" title="消费型接口 Consumer"></a>消费型接口 Consumer</h2><p>没有返回值，只有参数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Consumer</span>&lt;<span class="title">T</span>&gt; </span>{</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Performs this operation on the given argument.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> t the input argument</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">accept</span><span class="params">(T t)</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
 
 
+@FunctionalInterface
+public interface Function<T, R> {
+
+    /**
+     * Applies this function to the given argument.
+     *
+     * @param t 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/10/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -726,9 +763,294 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxjj.sort;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 蔚彬</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.8</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021/9/9 星期四</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@func</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sort</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[]{<span class="number">49</span>, <span class="number">38</span>, <span class="number">65</span>, <span class="number">97</span>, <span class="number">76</span>, <span class="number">13</span>, <span class="number">27</span>};</span><br><span class="line">        quickSort(arr);</span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>{</span><br><span class="line">        QSort(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">QSort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (low &lt; high) {</span><br><span class="line">            <span class="keyword">int</span> pivot = partition(arr, low, high);</span><br><span class="line">            QSort(arr, low, pivot-<span class="number">1</span>);</span><br><span class="line">            QSort(arr, pivot+<span class="number">1</span>, high);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>{</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> pivot = arr[low];</span><br><span class="line">        <span class="keyword">while</span> (low &lt; high) {</span><br><span class="line">            <span class="keyword">while</span> (low &lt; high &amp;&amp; arr[high] &gt;= pivot) {</span><br><span class="line">                high--;</span><br><span class="line">            }</span><br><span class="line">            arr[low] = arr[high];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (low &lt; high &amp;&amp; arr[low] &lt;= pivot) {</span><br><span class="line">                low ++;</span><br><span class="line">            }</span><br><span class="line">            arr[high] = arr[low];</span><br><span class="line">        }</span><br><span class="line">        arr[low] = pivot;</span><br><span class="line">        <span class="keyword">return</span> low;</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">exchange</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>{</span><br><span class="line">        <span class="keyword">int</span> temp = arr[low];</span><br><span class="line">        arr[low] = arr[high];</span><br><span class="line">        arr[high] = temp;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          快速排序
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
 
 
+package com.xxjj.sort;
+
+import java.util.Arrays;
+
+/**
+ * @author 蔚彬
+ * @version 1.8
+ * @da
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/09/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/09/08/%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Charles">
+      <meta itemprop="description" content="不要因为走的太远，忘了我们为什么出发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/08/%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">面经</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-08 09:36:19" itemprop="dateCreated datePublished" datetime="2021-09-08T09:36:19+08:00">2021-09-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-09-12 18:13:42" itemprop="dateModified" datetime="2021-09-12T18:13:42+08:00">2021-09-12</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9D%A2%E7%BB%8F/" itemprop="url" rel="index"><span itemprop="name">面经</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>705</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          茄子科技一面
+ 1.  自我介绍
+ 2.  HashMap 底层机制（数组链表红黑树，以及一些细节），如果需要有序呢？（LinkedHashMap）如果需要按照大小呢？（TreeMap）
+ 3.  MySQL 事务隔离级别？默认隔离级别呢？他们之间的区别呢？会引起什么问题呢？
+ 4.  MySQL 索引机制，InnoDB 引擎使用的聚簇索引，然后 B+ 树？
+ 5.  MySQL SQL语句查询慢，你是如何排查的，什么命令？一个啥来着
+ 6.  查询日志的最后的几行日志文件，使用的是什么命令（t
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/08/%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/09/08/%E9%9D%A2%E7%BB%8F%E7%A7%AF%E7%B4%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Charles">
+      <meta itemprop="description" content="不要因为走的太远，忘了我们为什么出发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/08/%E9%9D%A2%E7%BB%8F%E7%A7%AF%E7%B4%AF/" class="post-title-link" itemprop="url">面经积累</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-08 09:36:19" itemprop="dateCreated datePublished" datetime="2021-09-08T09:36:19+08:00">2021-09-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-09-09 09:29:52" itemprop="dateModified" datetime="2021-09-09T09:29:52+08:00">2021-09-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9D%A2%E7%BB%8F/" itemprop="url" rel="index"><span itemprop="name">面经</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>39</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          面经整合
+ 1. 高频 精心整理 20 道高频 Java 集合面试题
+ 2. Redis 面试高频题目
+ 3. 有赞面经
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/08/%E9%9D%A2%E7%BB%8F%E7%A7%AF%E7%B4%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -823,265 +1145,25 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="面经整合"><a href="#面经整合" class="headerlink" title="面经整合"></a>面经整合</h1><ol>
-<li><a target="_blank" rel="noopener" href="https://i.loli.net/2021/09/08/8ZvD45OzrVHxeUs.png">高频 精心整理 20 道高频 Java 集合面试题</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/javazhiyin/p/13839357.html">Redis 面试高频题目</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.pianshen.com/article/2791985168/">有赞面经</a></li>
-</ol>
-<h1 id="面试准备"><a href="#面试准备" class="headerlink" title="面试准备"></a>面试准备</h1><h2 id="线程池拒绝策略"><a href="#线程池拒绝策略" class="headerlink" title="线程池拒绝策略"></a>线程池拒绝策略</h2><ol>
-<li><strong>AbortPolicy</strong> 丢弃任务，并抛出 RejectedExecutionException 异常，是线程池的默认拒绝策略；</li>
-<li><strong>DiscardPolicy</strong> 丢弃任务，不抛出异常；</li>
-<li><strong>DiscardOldestPolicy</strong> 丢弃队列最前面的任务，然后重新提交被拒绝的任务；</li>
-<li><strong>CallerRunPolicy</strong> 由调用的线程处理该任务，谁调用谁的线程处理；</li>
-</ol>
-<h2 id="JVM-常见垃圾收集的特征和作用范围"><a href="#JVM-常见垃圾收集的特征和作用范围" class="headerlink" title="JVM 常见垃圾收集的特征和作用范围"></a>JVM 常见垃圾收集的特征和作用范围</h2><ul>
-<li><p>年轻代：serial GC、parNew GC、paraller Scavenge GC</p>
-</li>
-<li><p>老年代：serial old GC 、paraller old GC、CMS</p>
-</li>
-</ul>
-<h2 id="分布式锁的实现方式"><a href="#分布式锁的实现方式" class="headerlink" title="分布式锁的实现方式"></a>分布式锁的实现方式</h2><ol>
-<li>使用数据库乐观锁实现；</li>
-<li>使用 redis 的 setnx()、expire() 方法，用于分布式锁；</li>
-<li>基于 Zookeeper 实现分布式锁；</li>
-</ol>
-<h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="1）介绍下计算机网络常见的7层模型或者TCP-IP模型？"><a href="#1）介绍下计算机网络常见的7层模型或者TCP-IP模型？" class="headerlink" title="1）介绍下计算机网络常见的7层模型或者TCP/IP模型？"></a>1）介绍下计算机网络常见的7层模型或者TCP/IP模型？</h2><h4 id="TCP-IP-四层体系结构："><a href="#TCP-IP-四层体系结构：" class="headerlink" title="TCP/IP 四层体系结构："></a>TCP/IP 四层体系结构：</h4><p>应用层（TELNET，FTP，SMTP）、运输层（TCP或UDP）、网际层（IP）、网络接口层（数据链路层和物理层）</p>
-<h4 id="五层体系结构"><a href="#五层体系结构" class="headerlink" title="五层体系结构"></a>五层体系结构</h4><p>应用层、运输层、网络层、数据链路层、物理层</p>
-<h4 id="七层体系结构"><a href="#七层体系结构" class="headerlink" title="七层体系结构"></a>七层体系结构</h4><p>应用层、表示层、会话层、运输层、网络层、数据链路层、物理层</p>
-<h2 id="2）TCP-的三次握手和四次挥手"><a href="#2）TCP-的三次握手和四次挥手" class="headerlink" title="2）TCP 的三次握手和四次挥手"></a>2）TCP 的三次握手和四次挥手</h2><blockquote>
-<p>FIN：用来释放一个连接，FIN=1 表示此报文段的发送方的数据已经发送完毕，并要求释放运输连接。<br>ACK：仅当 ACK=1 时表示确认号字段有效。ACK=0 表示确认好无效。TCP 规定连接建立后所有传送的报文段都必须把 ACK 置 1。<br>SYN：在连接建立时用来同步序号，当 SYN=1 而 ACK=0 时，表明这是一个连接请求报文段。若对方同意建立连接，则应在响应的报文段中使 SYN=1 和 ACK=1。因此 SYN 置为1，就表示这是一个连接请求或连接接受报文。<br>ack：确认号，指期望收到对方的下一个报文段的第一个数据字节的序号。若 确认号=N 表示：到序号 N-1 为止的所有数据都已经正确收到</p>
-</blockquote>
-<p><img src="https://i.loli.net/2021/07/21/MP4mvtiFhHC51XT.png" alt="计算机网络三次握手四次挥手"><img src="https://i.loli.net/2021/09/08/GiN4mZWw2Qx1kay.png" alt="image-20210710233610787"></p>
-<h2 id="3）TCP-流量控制"><a href="#3）TCP-流量控制" class="headerlink" title="3）TCP 流量控制"></a>3）TCP 流量控制</h2><p>利用滑动窗口实现流量控制，就是让发送方的发送速率不要太快，既要让接收方来得及接受，也不要使网络发生拥塞。</p>
-<p>TCP 为每一个连接设一个持续计时器，时间到期，就发送一个零窗口探测报文段（携带 1 字节数据），对方在确认这个探测报文段时给出现在的窗口值，若是 0 ，则受到这个报文段的一方就重新设置持续计时器。若不是 0 ，则死锁的僵局打破。</p>
-<p>流量控制往往指在给定的发送端和接收端之间的点对点通信量的控制。</p>
-<h2 id="4）TCP-拥塞控制"><a href="#4）TCP-拥塞控制" class="headerlink" title="4）TCP 拥塞控制"></a>4）TCP 拥塞控制</h2><p>前提：网络能够承受现有的网络负荷<br>拥塞控制是一个全局性的过程，涉及到所有的主机、所有的路由器，以及降低网络传输性能有关的所有因素。</p>
-<h3 id="慢开始和拥塞避免方法"><a href="#慢开始和拥塞避免方法" class="headerlink" title="慢开始和拥塞避免方法"></a>慢开始和拥塞避免方法</h3><p>发送方维持一个叫做拥塞窗口 cwnd(congestion window) 的状态变量。cwnd 的大小取决于网络拥塞程度，并且动态地在变化。发送方让自己的发送窗口等于拥塞窗口。如再考虑到接收方的接受能力，则发送窗口还可能小于拥塞窗口。</p>
-<p>发送方控制 cwnd 的原则是：只要网路没有出现拥塞，拥塞窗口就再增大一些，以便把更多的分组发送出去，但只要出现拥塞，cwnd 就叫减小。</p>
-<p>主机刚发送报文段时设置 cwnd = 1，设置为一个最大报文段 MSS 的数值。没收到一个确认，增加一个 MSS 的数值。逐步增大，使分组注入网络。</p>
-<p>传输轮次：一个轮次就是一个往返时间 RTT，强调把 cwnd 所允许发送的报文段都连续发送出去，并收到了对已发送的最后一个字节的确认。</p>
-<p>==使用慢开始算法后，没经过一个传输轮次，cwnd 就加倍。==</p>
-<p>因此设置了慢开始门限 ssthresh：</p>
-<ol>
-<li>当 cwnd &lt; ssthresh 时，使用慢开始；</li>
-<li>当 cwnd &gt; ssthresh 时，使用拥塞避免算法；</li>
-<li>当 cwnd = ssthresh 时，既可使用慢开始算法，也可使用拥塞避免算法；</li>
-</ol>
-<p>==拥塞避免算法是让 cwnd 缓慢增大，没经过一个 RTT 就把 cwnd 加 1，而不是加倍，即线性增长。==</p>
-<p>无论在哪个阶段，只要发送方判断到网络拥塞，则把 ssthresh 设置为出现拥塞时发送方的一半（但不能小于2）。然后把 cwnd 重新设置为 1，执行慢开始算法。即迅速减少发送到网络中的分组数。</p>
-<p>窗口单位使用 报文段 而不是 字节。乘法减少，加法增大。</p>
-<p>==快重传==，即接收方每收到一个失序的报文段后，就立即发三个重复确认。==快恢复==，即收到三个重复确认后，执行乘法减小算法，把 ssthresh 减半。但是由于发送方认为网络可能没有发生拥塞，因此不执行慢开始算法，即 cwnd 不设置 1， 而是设置为 ssthresh 减半后的数值，执行拥塞避免算法。</p>
-<h2 id="5）TCP-连接管理"><a href="#5）TCP-连接管理" class="headerlink" title="5）TCP 连接管理"></a>5）TCP 连接管理</h2><h3 id="运输连接"><a href="#运输连接" class="headerlink" title="运输连接"></a>运输连接</h3><p>连接建立、数据传送、连接释放。三个阶段，采用客户-服务器方式。</p>
-<p>以下 A 指客户端，B 指服务器</p>
-<h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><ol>
-<li>A （CLOSED）的 TCP 向 B（LISTEN） 发出连接请求报文段，其首部的 SYN=1，并选择序号 seq=x，表明传送的第一个数据字节的序号是 x。==SYN=1，seq=x==</li>
-<li>B 的 TCP 收到连接请求报文段后，如同意，则发回确认，确认报文段中，使 ACK=1（表示确认号有效），其确认号 ack=x+1，自己的序号为 seq=y；即==SYN=1，ACK=1，ack=x+1，seq=y==</li>
-<li>A （SYN-SENT）收到此报文段后向 B（SYN-RCVD） 再发出确认；==ACK=1，ack=y+1，seq=x+1==；最后 （ESTABLISHED）</li>
-<li>为什么A最后还要发送一次确认呢？这主要是为了防止已失效的连接请求报文段突然又传送到了B,因而产生错误。所谓“已失效的连接请求报文段”是这样产生的。考虑一种正常情况，A发出连接请求，但因连接请求报文丢失而未收到确认。于是A再重传一次连接请求。后来收到了确认，建立了连接。数据传输完毕后，就释放了连接。A共发送了两个连接请求报文段，其中第一个丢失，第二个到达了B,没有“已失效的连接请求报文段”。现假定出现一种异常情况，即A发出的第一个连接请求报文段并没有丢失，而是在某些网络结点长时间滞留了，以致延误到连接释放以后的某个时间才到达B。本来这是一个早已失效的报文段。但B收到此失效的连接请求报文段后，就误认为是A又发出一次新的连接请求。于是就向A发出确认报文段，同意建立连接。假定不采用报文握手，那么只要B发出确认，新的连接就建立了。由于现在A并没有发出建立连接的请求，因此不会理睬B的确认，也不会向B发送数据。但B却以为新的运输连接已经建立了，并一直等待A发来数据。B的许多资源就这样白白浪费了。<br>采用三报文握手的办法，可以防止上述现象的发生。例如在刚才的异常情况下，A不会向B的确认发出确认。B由于收不到确认，就知道A并没有要求建立连接。</li>
-</ol>
-<h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><ol>
-<li>A 把连接释放报文段的首部 FIN 设为 1，其序号 为 u，等待Ｂ的确认，此时 A 停止发送数据；即==FIN=1，seq=u==</li>
-<li>B 发出确认，确认号为 ack=u+1，而这个报文段自己的序号为 seq=v，TCP 服务器进程通知高层应用进程，从 A 到 B 的方向上的连接就释放了，TCP 连接处于==半关闭==状态。B 若发送数据，A 仍要接受。即==ACK=1，ack=u+1，seq=v==</li>
-<li>若 B 已经没有了要向 A 发送的数据，其应用进程就通知 TCP 释放连接。即==ACK=1，FIN=1，ack=u+1，seq=w（因为期间可能还有 B 向 A 发送数据）==</li>
-<li>A 收到连接释放报文段后，必须发出确认。即==ACK=1，ack=w+1，seq=u+1==</li>
-<li>最后 A 再等待 2MSL 时间后彻底释放连接。原因：<ul>
-<li>第一，保证 A 发送的最后一个 ACK 报文段能够到达 B。</li>
-<li>第二，防止 “已失效的连接请求报文段” 出现在本连接中。A 在发送完最后一个 ACK 报文段后，再经过 2MSL 时间后，就可以使本连接持续时间内所产生的所有报文段，都从网络中消失。这样就可以使下一个连接中不会出现这种旧的连接请求报文段。</li>
-</ul>
-</li>
-<li>为什么A在TIME-WAT状态必须等待2MSL的时间呢？这有两个理由。<br>第一，为了保证A发送的最后一个ACK报文段能够到达B。这个ACK报文段有可能丢失，因而使处在LAST-ACK状态的B收不到对已发送的FN+ACK报文段的确认。B会超时重传这个FIN+ACK报文段，而A就能在2MSL时间内收到这个重传的FIN+ACK报文段。接着A重传一次确认，重新启动2MSL计时器。最后，A和B都正常进入到CLOSED状态。如果A在TIME-WAIT状态不等待一段时间，而是在发送完ACK报文段后立即释放连接，那么就无法收到B重传的FN+ACK报文段，因而也不会再发送一次确认报文段。这样，B就无法按照正常步骤进入 CLOSED状态。<br>第二，防止上一节提到的“已失效的连接请求报文段”出现在本连接中。A在发送完最后一个ACK报文段后，再经过时间2MSL,就可以使本连接持续的时间内所产生的所有报文段都从网络中消失。这样就可以使下一个新的连接中不会出现这种旧的连接请求报文段B只要收到了A发出的确认，就进入 CLOSED状态。同样，B在撤销相应的传输控制块TCB后，就结束了这次的TCP连接。我们注意到，B结東TCP连接的时间要比A早一些。<br>上述的TCP连接释放过程是四报文握手。除时间等待计时器外，TCP还设有一个保活计时器( keepalive timer)。设想有这样的情况：客户已主动与服务器建立了TCP连接。但后来客户端的主机突然出故障。显然，服务器以后就不能再收到客户发来的数据。因此，应当有措施使服务器不要再白白等待下去。这就是使用保活计时器。服务器每收到一次客户的数据，就重新设置保活计时器，时间的设置通常是两小时。若两小时没有收到客户的数据，服务器就发送一个探测报文段，以后则每隔75秒钟发送一次。若一连发送10个探测报文段后仍无客户的响应，服务器就认为客户端出了故障，接着就关闭这个连接。</li>
-</ol>
-<h1 id="JAVA-面试"><a href="#JAVA-面试" class="headerlink" title="JAVA 面试"></a>JAVA 面试</h1><blockquote>
-<p>threshold : 阈值，临界点<br>slot : 机会，插槽<br>capacity : 容量<br>entry : 入口，记录</p>
-</blockquote>
-<h2 id="Integer-面试题"><a href="#Integer-面试题" class="headerlink" title="Integer 面试题"></a>Integer 面试题</h2><ol>
-<li><p>```java<br>Object obj1 = true ? new Integer(1) : new Double(2.0);<br>System.out.println(obj1); // 1.0</p>
-<p>//因为三元运算符是一个整体</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. ```java</span><br><span class="line">       Integer i = new Integer(1);</span><br><span class="line">       Integer j = new Integer(1);</span><br><span class="line">       System.out.println(i == j); // false</span><br><span class="line">        </span><br><span class="line">       Integer m = 1;</span><br><span class="line">       Integer n = 1;</span><br><span class="line">       System.out.println(m == n); // true</span><br><span class="line">        </span><br><span class="line">       Integer x = 128;</span><br><span class="line">       Integer y = 128;</span><br><span class="line">       System.out.println(x == y); // false</span><br><span class="line">        </span><br><span class="line">   // 调用自动装箱，实际调用 Integer.valueOf(n)方法，该方法底层实现如下</span><br><span class="line">       public static Integer valueOf(int i) {</span><br><span class="line">           if (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)</span><br><span class="line">               return IntegerCache.cache[i + (-IntegerCache.low)];</span><br><span class="line">           return new Integer(i);</span><br><span class="line">       }</span><br><span class="line">   // 通过源码看出当 i 在 -128-127 范围内时，不产生新对象</span><br></pre></td></tr></table></figure></li>
-<li><p>```java<br>Integer i1 = 127;<br>int i2 = 127;<br>System.out.println(i1 == i2) // true</p>
-<p>// 只要有基本数据类型，判断的是值是否相同</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">## String 面试题</span><br><span class="line"></span><br><span class="line">1. ```java</span><br><span class="line">   String a = "hello" + "abc"; // 创建一个对象</span><br><span class="line">   </span><br><span class="line">   // 以上创建了几个对象?</span><br><span class="line">   // 编译器不傻，对以上操作会作优化，判断创建的常量池对象是否有引用指向。</span><br><span class="line">   // 以上会被优化为以下:</span><br><span class="line">   String a = "helloabc";</span><br></pre></td></tr></table></figure></li>
-<li><p>```java<br>String a = “hello”;<br>String b = “abc”;<br>String c = a + b;</p>
-<p>// 以上创建了几个对象？ 3个对象</p>
-<p>// 3 执行流程：<br>/*</p>
-<pre><code>1. 先创建一个StringBuilder sb = StringBuilder()
-2. 执行 sb.append("hello")
-3. 再执行 sb.append("abc")
-4. 调用 String c = sb.toString()，toString底层是new String()
-</code></pre>
-<p>*/</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. `intern()方法，始终返回常量池中的地址`</span><br><span class="line"></span><br><span class="line">## 集合框架</span><br><span class="line"></span><br><span class="line">### ArrayList 底层结构分析</span><br><span class="line"></span><br><span class="line">1. ArrayList 中维护了一个 Object 类型的数组 elementData 。</span><br><span class="line"></span><br><span class="line">   ```java</span><br><span class="line">   transient Object[] elemData;</span><br><span class="line">   transient : 瞬间的，短暂的，//修饰后表示该属性不会被序列化</span><br></pre></td></tr></table></figure></li>
-<li><p>当创建 ArrayList 对象时，如果实用的是无参构造器，则初始 elemData 容量为0，第一次添加，则扩容 elemData 为10，如果在此扩容，则扩容 elemData 为1.5倍。</p>
-</li>
-<li><p>如果使用的是指定大小的构造器，则初始 elemData 容量为指定大小，如果需要扩容，则直接扩容 elemData 为1.5倍。</p>
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">底层结构</th>
-<th align="center">版本</th>
-<th>线程安全（同步）</th>
-<th align="center">扩容</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">ArrayList</td>
-<td align="center">可变数组</td>
-<td align="center">jdk1.2</td>
-<td>不安全，效率高</td>
-<td align="center">如果是有参构造，1.5倍扩容，如果是无参构造，第一次10，第二次开始按1.5倍扩容</td>
-</tr>
-<tr>
-<td align="center">Vector</td>
-<td align="center">可变数组</td>
-<td align="center">jdk1.0</td>
-<td>安全，效率不高</td>
-<td align="center">如果是无参，默认10，满后按照2倍扩容，如果指定大小，则每次直接按照2倍扩容</td>
-</tr>
-</tbody></table>
-<h3 id="HashSet-底层机制"><a href="#HashSet-底层机制" class="headerlink" title="HashSet 底层机制"></a>HashSet 底层机制</h3><blockquote>
-<p>添加相同元素时，先判断 hash，再判断 equals()<br>默认 k，v 里的 v 是 PRESENT = Object[]</p>
-</blockquote>
-<ol>
-<li>HashSet 底层是 HashMap，第一次添加元素，table 数组扩容到 16，临界值（threshold）是 16 * loadFactor(0.75)。</li>
-<li>当 table 数组是使用到了临界值 12，则以 2 倍扩容，扩容为 32，新的临界值为 24，一次类推。（注：添加元素添加一个 size++，只要达到threshold 大小后就会扩容，并不在于数组要满）。</li>
-<li>Java 8 以后，当一条链表的元素个数到达 TREEIFY_THRESHOLD(默认为8)，并且 table 的大小 &gt;= MIN_TREEIFY_CAPACITY（默认为64），就会进行树化 (红黑树)，否则仍然采用数组扩容机制（并且会重新改变 hash 值）。</li>
-</ol>
-<h3 id="HashMap-扩容机制-（和-HashSet-一样）"><a href="#HashMap-扩容机制-（和-HashSet-一样）" class="headerlink" title="HashMap 扩容机制 （和 HashSet 一样）"></a>HashMap 扩容机制 （和 HashSet 一样）</h3><ol>
-<li>Hashmap底层维护了Node类型的数组 table,默认为nul</li>
-<li>当创建对象时，将加载因子( loadfactor)初始化为0.75.</li>
-<li>当添加key-val时，通过key的哈希值得到在 table的索引。然后判断该索引处是否有元素如果没有元素直接添加。如果该索引处有元素，继续判断该元素的key和准备加入的key相是否等，如果相等，则直接替换val;如果不相等需要判断是树结枃还是链表结枃，做出相应处理。如果添加时发现容量不够，则器要扩容。</li>
-<li>第1次添加，则需要扩容 table?容量为16,临界值( threshold为12(16*0.75)</li>
-<li>以后再扩容，则器要扩容 table?容量为原来的2倍(32),临界值为原来的2倍，即24依次类</li>
-<li>在Java8中，如果一条链表的元素个数超过 TREEIFY THRESHOLD(认是8),并且table的大小&gt;= MIN TREEIFY CAPACITY(默认64),就会进行树化（红黑树）</li>
-</ol>
-<h3 id="试分析-HashSet-和-TreeSet-分别如何实现去重"><a href="#试分析-HashSet-和-TreeSet-分别如何实现去重" class="headerlink" title="试分析 HashSet 和 TreeSet 分别如何实现去重"></a>试分析 HashSet 和 TreeSet 分别如何实现去重</h3><ol>
-<li>HashSet 的去重机制：hashCode() + equals()，底层先通过存入对象，进行运算得到一个 hash 值，通过 hash 值得到对应的索引，如果发现 table 索引所在的位置没有数据，就直接存放，如果有数据，就进行 equals 比较【遍历比较】,如果比较后，不相同，就加入，否则不加入。</li>
-<li>TreeSet 的去重机制：如果你传入一个 Compatator 匿名对象，就用实现的 compare 去重，如果方法返回 0，就认为是相同的元素（数据），就不添加，如果你没有传入一个 Comparator 匿名对象，则以你添加的对象实现的Compareable 接口的 compateTo 去重。</li>
-</ol>
-<h3 id="以下代码有没有问题"><a href="#以下代码有没有问题" class="headerlink" title="以下代码有没有问题"></a>以下代码有没有问题</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TreeSet treeSet = <span class="keyword">new</span> TreeSet();</span><br><span class="line">treeSet.add(<span class="keyword">new</span> Person());</span><br></pre></td></tr></table></figure>
+          面经整合
+ 1. 高频 精心整理 20 道高频 Java 集合面试题
+ 2. Redis 面试高频题目
+ 3. 有赞面经
 
-<ul>
-<li>分析 源码 + 接口 + 动态绑定<ol>
-<li>add 方法，因为 TreeSet() 没有传入 Comparator 接口的匿名内部类。</li>
-<li>所以在底层 Comparable&lt;? super K&gt; k = (Comparable&lt;? super K&gt;) key;<br>即会把 Person 转为 Comparable。</li>
-<li>如果没有实现 则 ClassCastException。</li>
-</ol>
-</li>
-</ul>
-<h3 id="Java-ArrayList-源码挖掘"><a href="#Java-ArrayList-源码挖掘" class="headerlink" title="Java ArrayList 源码挖掘"></a>Java ArrayList 源码挖掘</h3><blockquote>
-<p>第一次分析源码时，感觉第二次添加 elementData 数组应该地址不变，结果忽略了一个重要问题：<br>                elementData = Arrays.copyOf(elementData, newCapacity);<br>在这里，是会返回重新复制的 elementData 的，以新容量</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] EMPTY_ELEMENTDATA = {};</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};</span><br><span class="line"><span class="keyword">transient</span> Object[] elementData;  </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"><span class="comment">// 第一步，指向无参构造，让 elementData Object数组指向默认的静态数组</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">    }</span><br><span class="line"><span class="comment">// 第二步，执行 add 方法，执行 ensureCapacityInternal(size + 1);size 默认为 0</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>{</span><br><span class="line">    ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">    elementData[size++] = e;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">}</span><br><span class="line"><span class="comment">// 确保容量内部.方法里 执行确保显式容量  </span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>{      ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));</span><br><span class="line">    }</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calculateCapacity</span><span class="params">(Object[] elementData, <span class="keyword">int</span> minCapacity)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {</span><br><span class="line">        <span class="keyword">return</span> Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> minCapacity;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureExplicitCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>{</span><br><span class="line">    modCount++;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// overflow-conscious code</span></span><br><span class="line">    <span class="keyword">if</span> (minCapacity - elementData.length &gt; <span class="number">0</span>)</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>{</span><br><span class="line">    <span class="comment">// overflow-conscious code 溢出意识</span></span><br><span class="line">    <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">    <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
-<h3 id="Java-HashSet源码挖掘"><a href="#Java-HashSet源码挖掘" class="headerlink" title="Java HashSet源码挖掘"></a>Java HashSet源码挖掘</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">5024744406713321676L</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> HashMap&lt;E,Object&gt; map;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object PRESENT = <span class="keyword">new</span> Object();</span><br><span class="line"><span class="comment">// 初始化，第一步</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">()</span> </span>{</span><br><span class="line">    map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">}</span><br><span class="line"><span class="comment">//第二步</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>;<span class="comment">//16</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAXIMUM_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TREEIFY_THRESHOLD = <span class="number">8</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="number">64</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</span><br><span class="line"><span class="keyword">transient</span> Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</span><br><span class="line"><span class="keyword">transient</span> <span class="keyword">int</span> size;</span><br><span class="line"><span class="keyword">transient</span> <span class="keyword">int</span> modCount;</span><br><span class="line"><span class="keyword">int</span> threshold;</span><br><span class="line"><span class="keyword">final</span> <span class="keyword">float</span> loadFactor;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="keyword">this</span>.loadFactor = DEFAULT_LOAD_FACTOR; <span class="comment">// all other fields defaulted</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// add 操作</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> map.put(e, PRESENT)==<span class="keyword">null</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> putVal(hash(key), key, value, <span class="keyword">false</span>, <span class="keyword">true</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>{</span><br><span class="line">    <span class="keyword">int</span> h;</span><br><span class="line">    <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent, <span class="keyword">boolean</span> evict)</span> </span>{</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="keyword">int</span> n, i;</span><br><span class="line">    <span class="keyword">if</span> ((tab = table) == <span class="keyword">null</span> || (n = tab.length) == <span class="number">0</span>)</span><br><span class="line">        n = (tab = resize()).length;</span><br><span class="line">    <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="keyword">null</span>)</span><br><span class="line">        tab[i] = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">else</span> {</span><br><span class="line">        Node&lt;K,V&gt; e; K k;</span><br><span class="line">        <span class="keyword">if</span> (p.hash == hash &amp;&amp;</span><br><span class="line">            ((k = p.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">            e = p;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (p <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="keyword">this</span>, tab, hash, key, value);</span><br><span class="line">        <span class="keyword">else</span> {</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> binCount = <span class="number">0</span>; ; ++binCount) {</span><br><span class="line">                <span class="keyword">if</span> ((e = p.next) == <span class="keyword">null</span>) {</span><br><span class="line">                    p.next = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">                    <span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="number">1</span>) <span class="comment">// -1 for 1st</span></span><br><span class="line">                        treeifyBin(tab, hash);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                p = e;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) { <span class="comment">// existing mapping for key</span></span><br><span class="line">            V oldValue = e.value;</span><br><span class="line">            <span class="keyword">if</span> (!onlyIfAbsent || oldValue == <span class="keyword">null</span>)</span><br><span class="line">                e.value = value;</span><br><span class="line">            afterNodeAccess(e);</span><br><span class="line">            <span class="keyword">return</span> oldValue;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    ++modCount;</span><br><span class="line">    <span class="keyword">if</span> (++size &gt; threshold)</span><br><span class="line">        resize();</span><br><span class="line">    afterNodeInsertion(evict);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
-<h2 id="1）说说常见的集合有哪些吧？"><a href="#1）说说常见的集合有哪些吧？" class="headerlink" title="1）说说常见的集合有哪些吧？"></a>1）说说常见的集合有哪些吧？</h2><p>Map 接口和 Collection 接口是所有集合框架的父接口：</p>
-<ol>
-<li>Collection 接口的子接口包括：Set 接口和 List 接口，还有 Queue 接口</li>
-<li>Map 接口的主要实现类有：HashMap、TreeMap、Hashtable、ConcurrentHashMap、以及 Properties</li>
-<li>Set 接口的实现类主要有：HashSet、TreeSet、LinkedHashSet 等</li>
-<li>List 接口的实现类主要有：ArrayList、LinkedList、Vector</li>
-</ol>
-<h2 id="2）HashMap与HashTable的区别？"><a href="#2）HashMap与HashTable的区别？" class="headerlink" title="2）HashMap与HashTable的区别？"></a>2）HashMap与HashTable的区别？</h2><ol>
-<li>HashMap没有考虑同步，是线程不安全的；Hashtable使用了synchronized关键字，是线程安全的；</li>
-<li>HashMap允许K/V都为null；后者K/V都不允许为null；</li>
-<li>HashMap继承自AbstractMap类；而Hashtable继承自Dictionary类；</li>
-</ol>
-<h2 id="3）HashMap在JDK1-7和JDK1-8中有哪些不同？"><a href="#3）HashMap在JDK1-7和JDK1-8中有哪些不同？" class="headerlink" title="3）HashMap在JDK1.7和JDK1.8中有哪些不同？"></a>3）HashMap在JDK1.7和JDK1.8中有哪些不同？</h2><p>答：</p>
-<table>
-<thead>
-<tr>
-<th align="left">不同</th>
-<th align="left">JDK 1.7</th>
-<th align="left">JDK 1.8</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">存储结构</td>
-<td align="left">数组 + 链表</td>
-<td align="left">数组 + 链表 + 红黑树</td>
-</tr>
-<tr>
-<td align="left">初始化方式</td>
-<td align="left">单独函数：<code>inflateTable()</code></td>
-<td align="left">直接集成到了扩容函数<code>resize()</code>中</td>
-</tr>
-<tr>
-<td align="left">hash值计算方式</td>
-<td align="left">扰动处理 = 9次扰动 = 4次位运算 + 5次异或运算</td>
-<td align="left">扰动处理 = 2次扰动 = 1次位运算 + 1次异或运算</td>
-</tr>
-<tr>
-<td align="left">存放数据的规则</td>
-<td align="left">无冲突时，存放数组；冲突时，存放链表</td>
-<td align="left">无冲突时，存放数组；冲突 &amp; 链表长度 &lt; 8：存放单链表；冲突 &amp; 链表长度 &gt; 8：树化并存放红黑树</td>
-</tr>
-<tr>
-<td align="left">插入数据方式</td>
-<td align="left">头插法（先讲原位置的数据移到后1位，再插入数据到该位置）</td>
-<td align="left">尾插法（直接插入到链表尾部/红黑树）</td>
-</tr>
-<tr>
-<td align="left">扩容后存储位置的计算方式</td>
-<td align="left">全部按照原来方法进行计算（即hashCode -&gt;&gt; 扰动函数 -&gt;&gt; (h&amp;length-1)）</td>
-<td align="left">按照扩容后的规律计算（即扩容后的位置=原位置 or 原位置 + 旧容量）</td>
-</tr>
-</tbody></table>
-<h2 id="4）为什么HashMap中String、Integer这样的包装类适合作为K？"><a href="#4）为什么HashMap中String、Integer这样的包装类适合作为K？" class="headerlink" title="4）为什么HashMap中String、Integer这样的包装类适合作为K？"></a>4）为什么HashMap中String、Integer这样的包装类适合作为K？</h2><p>答：String、Integer等包装类的特性能够保证Hash值的不可更改性和计算准确性，能够有效的减少Hash碰撞的几率</p>
-<ol>
-<li>都是final类型，即不可变性，保证key的不可更改性，不会存在获取hash值不同的情况</li>
-<li>内部已重写了<code>equals()</code>、<code>hashCode()</code>等方法，遵守了HashMap内部的规范（不清楚可以去上面看看putValue的过程），不容易出现Hash值计算错误的情况；</li>
-</ol>
-<p><strong>面试官：如果我想要让自己的Object作为K应该怎么办呢？</strong></p>
-<p>答：重写<code>hashCode()</code>和<code>equals()</code>方法</p>
-<ol>
-<li><strong>重写<code>hashCode()</code>是因为需要计算存储数据的存储位置</strong>，需要注意不要试图从散列码计算中排除掉一个对象的关键部分来提高性能，这样虽然能更快但可能会导致更多的Hash碰撞；</li>
-<li><strong>重写<code>equals()</code>方法</strong>，需要遵守自反性、对称性、传递性、一致性以及对于任何非null的引用值x，x.equals(null)必须返回false的这几个特性，<strong>目的是为了保证key在哈希表中的唯一性</strong>；</li>
-</ol>
-<h2 id="5）ConcurrentHashMap和Hashtable的区别？"><a href="#5）ConcurrentHashMap和Hashtable的区别？" class="headerlink" title="5）ConcurrentHashMap和Hashtable的区别？"></a>5）ConcurrentHashMap和Hashtable的区别？</h2><p>答：ConcurrentHashMap 结合了 HashMap 和 HashTable 二者的优势。HashMap 没有考虑同步，HashTable 考虑了同步的问题。但是 HashTable 在每次同步执行时都要锁住整个结构。ConcurrentHashMap 锁的方式是稍微细粒度的。</p>
-<h2 id="6）Java集合的快速失败机制-“fail-fast”？"><a href="#6）Java集合的快速失败机制-“fail-fast”？" class="headerlink" title="6）Java集合的快速失败机制 “fail-fast”？"></a>6）Java集合的快速失败机制 “fail-fast”？</h2><p>答：</p>
-<p><strong>是java集合的一种错误检测机制，当多个线程对集合进行结构上的改变的操作时，有可能会产生 fail-fast 机制。</strong></p>
-<p>例如：假设存在两个线程（线程1、线程2），线程1通过Iterator在遍历集合A中的元素，在某个时候线程2修改了集合A的结构（是结构上面的修改，而不是简单的修改集合元素的内容），那么这个时候程序就会抛出 ConcurrentModificationException 异常，从而产生fail-fast机制。</p>
-<p><strong>原因：迭代器在遍历时直接访问集合中的内容，并且在遍历过程中使用一个 modCount 变量。集合在被遍历期间如果内容发生变化，就会改变modCount的值。每当迭代器使用hashNext()/next()遍历下一个元素之前，都会检测modCount变量是否为expectedmodCount值，是的话就返回遍历；否则抛出异常，终止遍历。</strong></p>
-<p><strong>解决办法：</strong></p>
-<p><strong>1. 在遍历过程中，所有涉及到改变modCount值得地方全部加上synchronized。</strong></p>
-<p><strong>2. 使用CopyOnWriteArrayList来替换ArrayList</strong></p>
-<h2 id="7）ArrayList-和-Vector-的区别？"><a href="#7）ArrayList-和-Vector-的区别？" class="headerlink" title="7）ArrayList 和 Vector 的区别？"></a>7）ArrayList 和 Vector 的区别？</h2><p>答：</p>
-<p>这两个类都实现了 List 接口（List 接口继承了 Collection 接口），他们都是有序集合，即存储在这两个集合中的元素位置都是有顺序的，相当于一种动态的数组，我们以后可以按位置索引来取出某个元素，并且其中的数据是允许重复的，这是与 HashSet 之类的集合的最大不同处，HashSet 之类的集合不可以按索引号去检索其中的元素，也不允许有重复的元素。</p>
-<p>ArrayList 与 Vector 的区别主要包括两个方面：</p>
-<ol>
-<li>同步性：<br>Vector 是线程安全的，也就是说它的方法之间是线程同步（加了synchronized 关键字）的，而 ArrayList 是线程不安全的，它的方法之间是线程不同步的。如果只有一个线程会访问到集合，那最好是使用 ArrayList，因为它不考虑线程安全的问题，所以效率会高一些；如果有多个线程会访问到集合，那最好是使用 Vector，因为不需要我们自己再去考虑和编写线程安全的代码。</li>
-<li>数据增长：<br>ArrayList 与 Vector 都有一个初始的容量大小，当存储进它们里面的元素的个人超过了容量时，就需要增加 ArrayList 和 Vector 的存储空间，每次要增加存储空间时，不是只增加一个存储单元，而是增加多个存储单元，每次增加的存储单元的个数在内存空间利用与程序效率之间要去的一定的平衡。Vector 在数据满时（加载因子1）增长为原来的两倍（扩容增量：原容量的 2 倍），而 ArrayList 在数据量达到容量的一半时（加载因子 0.5）增长为原容量的 (0.5 倍 + 1) 个空间。</li>
-</ol>
-<hr>
-<h2 id="8）ArrayList和LinkedList的区别？"><a href="#8）ArrayList和LinkedList的区别？" class="headerlink" title="8）ArrayList和LinkedList的区别？"></a>8）ArrayList和LinkedList的区别？</h2><p>答：</p>
-<ol>
-<li>LinkedList 实现了 List 和 Deque 接口，一般称为双向链表；ArrayList 实现了 List 接口，动态数组；</li>
-<li>LinkedList 在插入和删除数据时效率更高，ArrayList 在查找某个 index 的数据时效率更高；</li>
-<li>LinkedList 比 ArrayList 需要更多的内存；</li>
-</ol>
-<p><strong>面试官：Array 和 ArrayList 有什么区别？什么时候该应 Array 而不是 ArrayList 呢？</strong></p>
-<p>答：它们的区别是：</p>
-<ol>
-<li>Array 可以包含基本类型和对象类型，ArrayList 只能包含对象类型。</li>
-<li>Array 大小是固定的，ArrayList 的大小是动态变化的。</li>
-<li>ArrayList 提供了更多的方法和特性，比如：addAll()，removeAll()，iterator() 等等。</li>
-</ol>
-<p>对于基本类型数据，集合使用自动装箱来减少编码工作量。但是，当处理固定大小的基本数据类型的时候，这种方式相对比较慢。</p>
-<hr>
-<h2 id="9）HashSet是如何保证数据不可重复的？"><a href="#9）HashSet是如何保证数据不可重复的？" class="headerlink" title="9）HashSet是如何保证数据不可重复的？"></a>9）HashSet是如何保证数据不可重复的？</h2><p>答：HashSet的底层其实就是HashMap，只不过我们<strong>HashSet是实现了Set接口并且把数据作为K值，而V值一直使用一个相同的虚值来保存</strong>，我们可以看到源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) {    return map.put(e, PRESENT)==null;// 调用HashMap的put方法,PRESENT是一个至始至终都相同的虚值}</span><br></pre></td></tr></table></figure>
-
-<p>由于HashMap的K值本身就不允许重复，并且在HashMap中如果K/V相同时，会用新的V覆盖掉旧的V，然后返回旧的V，那么在HashSet中执行这一句话始终会返回一个false，导致插入失败，这样就保证了数据的不可重复性；</p>
-<h2 id="10）HTTP-与-HTTPS-的区别"><a href="#10）HTTP-与-HTTPS-的区别" class="headerlink" title="10）HTTP 与 HTTPS  的区别"></a>10）HTTP 与 HTTPS  的区别</h2><p>1、HTTPS  协议需要到 CA （Certificate Authority，证书颁发机构）申请证书，一般免费证书较少，因而需要一定费用。(以前的网易官网是http，而网易邮箱是 https 。)</p>
-<p>2、HTTP 是超文本传输协议，信息是明文传输，HTTPS 则是具有安全性的 SSL 加密传输协议。</p>
-<p>3、HTTP 和 HTTPS 使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</p>
-<p>4、HTTP 的连接很简单，是无状态的。HTTPS 协议是由 SSL+HTTP 协议构建的可进行加密传输、身份认证的网络协议，比 HTTP 协议安全。(无状态的意思是其数据包的发送、传输和接收都是相互独立的。无连接的意思是指通信双方都不长久的维持对方的任何信息。)</p>
-<h2 id="11）、进程之间的通信方式？"><a href="#11）、进程之间的通信方式？" class="headerlink" title="11）、进程之间的通信方式？"></a>11）、进程之间的通信方式？</h2><p>1.管道：速度慢，容量有限，只有父子进程能通讯<br>2.FIFO：任何进程间都能通讯，但速度慢<br>3.消息队列：容量受到系统限制，且要注意第一次读的时候，要考虑上一次没有读完数据的问题  4.信号量：不能传递复杂消息，只能用来同步<br>5.共享内存区：能够很容易控制容量，速度快，但要保持同步，比如一个进程在写的时候，另一个进程要注意读写的问题，相当于线程中的线程安全，当然，共享内存区同样可以用作线程间通讯，不过没这个必要，线程间本来就已经共享了同一进程内的一块内存</p>
-<h2 id="16-使用Spring主要实现什么特性？Ioc和AOP？AOP怎么去实现的？为什么我写了个注解或者Spring的配置文件配置了就可以识别？延伸到代理模式（代理类和被代理类有什么关系）？适配器模式的区别？装饰器模式？"><a href="#16-使用Spring主要实现什么特性？Ioc和AOP？AOP怎么去实现的？为什么我写了个注解或者Spring的配置文件配置了就可以识别？延伸到代理模式（代理类和被代理类有什么关系）？适配器模式的区别？装饰器模式？" class="headerlink" title="16) 使用Spring主要实现什么特性？Ioc和AOP？AOP怎么去实现的？为什么我写了个注解或者Spring的配置文件配置了就可以识别？延伸到代理模式（代理类和被代理类有什么关系）？适配器模式的区别？装饰器模式？"></a>16) 使用Spring主要实现什么特性？Ioc和AOP？AOP怎么去实现的？为什么我写了个注解或者Spring的配置文件配置了就可以识别？延伸到代理模式（代理类和被代理类有什么关系）？适配器模式的区别？装饰器模式？</h2>
+面试准备
+线程池拒绝策略
+ 1. AbortPolicy 丢弃任务，并抛出 RejectedExecutionException 异常，是线程池的默认拒绝策略；
+ 2. DiscardPolicy 丢弃任务，不抛出异常；
+ 3. DiscardOldestPolicy 丢弃队列最前面的任务，然后重新提交被拒绝的任务；
+ 4. CallerRunPolicy 由调用的线程处理
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/08/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1170,68 +1252,26 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Redis-深入理解"><a href="#Redis-深入理解" class="headerlink" title="Redis 深入理解"></a>Redis 深入理解</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/javazhiyin/p/13839357.html">https://www.cnblogs.com/javazhiyin/p/13839357.html</a></p>
-<h2 id="什么是-Redis"><a href="#什么是-Redis" class="headerlink" title="什么是 Redis"></a>什么是 Redis</h2><p>Redis（Remote Dictionary Server）是一个使用 C 语言编写的，开源的（BSD）<strong>高性能非关系型（NoSQL）的键值对数据库</strong>。</p>
-<p>Redis 可以存储五中不同类型的值之间的映射。键的类型只能为字符串，值支持五种数据结构：</p>
-<ol>
-<li>String（字符串）</li>
-<li>List（列表）</li>
-<li>Set（集合）</li>
-<li>Hash（哈希）</li>
-<li>ZSet（有序集合）</li>
-</ol>
-<p>与传统数据库不同的是，Redis 的数据是存在内存中的，所以读写速率非常快，因此 Redis 被广泛用于<strong>缓存</strong>方向，每秒可以处理超过 10 万次读写操作，是已知性能最快的 Key-Value DB。另外 Redis 也经常用来做<strong>分布式锁</strong>。除此之外，Redis 支持事务、持久化、LUA 脚本、LRU 驱动事件、多种集群方案。</p>
-<h2 id="Redis-的优缺点"><a href="#Redis-的优缺点" class="headerlink" title="Redis 的优缺点"></a>Redis 的优缺点</h2><h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><ol>
-<li>读写性能优异，Redis 能读的速度是 110000次/s，写的速度是 81000次/s；</li>
-<li>支持 AOF 和 RDB 两种持久化方式；</li>
-<li>支持事务，Redis 的所有操作都是原子性的。同时 Redis 还支持对几个操作合并后的原子性执行；</li>
-<li>数据结构丰富，List，String，Hash，Set，Zset；</li>
-<li>支持<strong>主从复制</strong>，主机会自动将数据同步到从机，<strong>可以进行读写分离</strong>；</li>
-</ol>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ol>
-<li>数据库容量收到物理内存的限制，不能用作海量数据的高性能读写，因此 Redis 适合的场景主要局限在较小数据量的高性能操作和运算上；</li>
-<li>Redis 不具备自动容错和恢复功能，主机从机的宕机都会导致前端部分读写请求失败，需要等待机器重启或手动切换前端的 IP 才能恢复；</li>
-<li>主机宕机，宕机前有部分数据未能及时同步到从机，切换 IP 后还会引入数据不一致问题，降低系统的可用性；</li>
-<li>Redis 较难支持在线扩容，在集群容量达到上限时在线扩容会变得很复杂。为避免这一问题，运维人员在系统上线时必须确保有足够的空间，这对资源造成很大浪费；</li>
-</ol>
-<h2 id="为什么要用-Redis-为什么要用缓存"><a href="#为什么要用-Redis-为什么要用缓存" class="headerlink" title="为什么要用 Redis /为什么要用缓存"></a>为什么要用 Redis /为什么要用缓存</h2><p>主要从“高性能”和“高并发”这两点来看待这个问题。</p>
-<h3 id="高性能"><a href="#高性能" class="headerlink" title="高性能"></a>高性能</h3><p>假如用户第一次访问数据库中的某些数据。这个过程会比较慢，因为是从硬盘上读取的。将该用户访问的数据存在数缓存中，这样下一次再访问这些数据的时候就可以直接从缓存中获取了。操作缓存就是直接操作内存，所以速度相当快。如果数据库中的对应数据改变的之后，同步改变缓存中相应的数据即可！</p>
-<p><img src="https://i.loli.net/2021/09/08/lW4xeQCRS1psDGd.png" alt="Redis 常见面试题（2020最新版）"></p>
-<h3 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h3><p>直接操作缓存能够承受的请求是远远大于直接访问数据库的，所以我们可以考虑把数据库中的部分数据转移到缓存中去，这样用户的一部分请求会直接到缓存这里而不用经过数据库。</p>
-<p><img src="https://i.loli.net/2021/09/08/8zdMhHkUNv5jcBK.png" alt="Redis 常见面试题（2020最新版）"></p>
-<h2 id="为什么要用-Redis-而不用-map-guava-做缓存"><a href="#为什么要用-Redis-而不用-map-guava-做缓存" class="headerlink" title="为什么要用 Redis 而不用 map/guava 做缓存?"></a>为什么要用 Redis 而不用 map/guava 做缓存?</h2><p>缓存分为本地缓存和分布式缓存。以 Java 为例，使用自带的 map 或者 guava 实现的是<strong>本地缓存</strong>，最主要的特点是轻量以及快速，生命周期随着 jvm 的销毁而结束，并且在<strong>多实例的情况下，每个实例都需要各自保存一份缓存，缓存不具有一致性</strong>。</p>
-<p>使用 Redis 或 Memcached 之类的称为<strong>分布式缓存</strong>，在多实例的情况下，各实例共用一份缓存数据，<strong>缓存具有一致性</strong>。缺点是需要保持 Redis 或 Memcached 服务的高可用，整个程序架构上较为复杂。</p>
-<h2 id="Redis为什么这么快"><a href="#Redis为什么这么快" class="headerlink" title="Redis为什么这么快"></a>Redis为什么这么快</h2><ol>
-<li>完全基于内存，绝大部分请求时纯粹的内存操作，非常快速。数据在内存中的优势就是查找和操作的时间复杂度很低；</li>
-<li>数据结构简单，对数据操作也简单，Redis 的数据结构时专门进行设计的；</li>
-<li>采用<strong>单线程</strong>，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU，不用考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗；</li>
-<li>使用多路 I/O 复用模型，非阻塞 IO；</li>
-<li>使用的底层模型不容，他们之间的底层实现方式以及客户端之间通信的应用协议不一样，Redis 直接自己构建了 VM 机制，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求；</li>
-</ol>
-<h2 id="什么是-Redis-持久化？"><a href="#什么是-Redis-持久化？" class="headerlink" title="什么是 Redis 持久化？"></a>什么是 Redis 持久化？</h2><p>持久化机制就是把内存的数据写入到磁盘中去，防止服务宕机了内存数据丢失。Redis 提供两种持久化机制 <strong>RDB（默认）</strong> 和 <strong>AOF</strong> 机制。</p>
-<h3 id="RDB（Redis-DataBase）"><a href="#RDB（Redis-DataBase）" class="headerlink" title="RDB（Redis DataBase）"></a>RDB（Redis DataBase）</h3><p>RDB 是Redis 的默认的持久化方式。按照一定的时间将内存中的数据以快照的形式保存到硬盘中，对应的产生的数据文件为 dump.rdb。通过配置文件中的 save 参数来定义快照的周期。</p>
-<h4 id="优点：-1"><a href="#优点：-1" class="headerlink" title="优点："></a>优点：</h4><ol>
-<li>只有一个 dump.rdb，方便持久化；</li>
-<li>容灾性好，一个文件可以保存到安全的磁盘；</li>
-<li>性能最大化，fork 子进程来完成写操作，让主进程继续处理命令，所以是 IO 最大化。使用单独的子进程来进行持久化，主进程不会进行任何的 IO 操作，保证了 Redis 的高性能；</li>
-<li>相对于大数据集时，比 AOF 的启动效率更高。</li>
-</ol>
-<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><ol>
-<li>数据安全性较低。RDB 是间隔一段时间进行持久化，如果持久化之间 Redis 发生故障，会发生数据丢失。所以这种方式更适合数据要求不严谨的时候；</li>
-<li>AOF 持久化方式，是指所有的命令行记录以 Redis 命令请求协议的格式完全持久化存储 保存为 aof 文件。</li>
-</ol>
-<h3 id="AOF（Append-only-file"><a href="#AOF（Append-only-file" class="headerlink" title="AOF（Append-only file)"></a>AOF（Append-only file)</h3><p>是将 Redis 执行的每次写命令记录到单独的日志文件中，当重启Redis会重新将持久化的日志中文件恢复数据。</p>
-<p><img src="https://i.loli.net/2021/09/08/8ZvD45OzrVHxeUs.png" alt="img"></p>
-<h4 id="优点：-2"><a href="#优点：-2" class="headerlink" title="优点："></a>优点：</h4><ol>
-<li>数据安全，AOF 持久化可以配置 appendfsync 属性，有 always，每进行一次命令操作就记录到 aof 文件中一次；</li>
-<li>通过 append 模式写文件，即使中途服务器宕机，可以通过 redis-check-aof 工具解决数据一致性问题；</li>
-<li>AOF 机制的 rewrite 模式。AOF 文件没被 rewrite 之前（文件过大时会对命令进行合并重写，可以删除其中的一些命令）；</li>
-</ol>
-<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><ol>
-<li>AOF 文件比 RDB 文件大，且恢复速度慢；</li>
-<li>数据集大的时候，比 RDB 启动效率低；</li>
-</ol>
+          Redis 深入理解
+参考链接：https://www.cnblogs.com/javazhiyin/p/13839357.html
 
+什么是 Redis
+Redis（Remote Dictionary Server）是一个使用 C 语言编写的，开源的（BSD）高性能非关系型（NoSQL）的键值对数据库。
+
+Redis 可以存储五中不同类型的值之间的映射。键的类型只能为字符串，值支持五种数据结构：
+
+ 1. String（字符串）
+ 2. List（列表）
+ 3. Set（集合）
+ 4. Has
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/08/Redis-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1324,26 +1364,24 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Java-注解"><a href="#Java-注解" class="headerlink" title="Java 注解"></a>Java 注解</h1><h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><ol>
-<li>Annotation 也被称为元数据（Metadata），用于修饰包、类、方法、属性、局部变量等数据信息；</li>
-<li>和注释一样，注解不影响程序逻辑，但注解 可以被编译或运行，相当于嵌入在代码中的补充信息；</li>
-</ol>
-<h2 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h2><ol>
-<li><p><strong>@Retention</strong>：指定注解三种作用范围</p>
-<ol>
-<li>RetentionPolicy.SOURCE：编译器使用后，直接丢弃这种策略的注释；</li>
-<li>RetentionPolicy.CLASS（默认值）：编译器将把注解记录在 class 文件，当运行 Java 程序时，JVM 不会保留注解；</li>
-<li>RetentionPolicy.RUNTIME：编译器将把注解记录在 class 文件，当运行 Java 程序时，JVM 会保留注解，程序可以通过反射获取该注解；</li>
-</ol>
-</li>
-<li><p><strong>@Target</strong>：指定被修饰注解能作用于哪些程序元素上，包含 value 的成员变量</p>
-</li>
-<li><p><strong>@Documented</strong>：用于指定该元注解修饰的 Annotation 类将被 javadoc 工具提取成文档，即在生成文档时，可以看到该注解。</p>
-</li>
-<li><p><strong>@Inherited</strong>：被它修饰的 Annotation 将具有继承性，如果某个类使用了被 @Inherited 修饰的注解，则其子类自动具有该注解。</p>
-</li>
-</ol>
+          Java 注解
+理解
+ 1. Annotation 也被称为元数据（Metadata），用于修饰包、类、方法、属性、局部变量等数据信息；
+ 2. 和注释一样，注解不影响程序逻辑，但注解 可以被编译或运行，相当于嵌入在代码中的补充信息；
 
+元注解
+ 1. @Retention：指定注解三种作用范围
+    
+     1. RetentionPolicy.SOURCE：编译器使用后，直接丢弃这种策略的注释；
+     2. RetentionPolicy.CLASS（默认值）：编译器将把注解记录在
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/07/Java-%E6%B3%A8%E8%A7%A3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1436,308 +1474,30 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Huffman-树及编码"><a href="#Huffman-树及编码" class="headerlink" title="Huffman 树及编码"></a>Huffman 树及编码</h1><h2 id="基础概念及模型图"><a href="#基础概念及模型图" class="headerlink" title="基础概念及模型图"></a>基础概念及模型图</h2><p><strong>路径</strong>：从树中一个结点到另一个结点之间的分支构成这两个结点之间的路径，路径上的分支数目称为路径长度。</p>
-<p><strong>树的路径长度</strong>：是从树根到每一个节点的路径长度之和。</p>
-<p><strong>结点的带权路径长度</strong>：从该结点到树根之间的路径长度与结点上权的乘积。</p>
-<p><strong>WPL</strong>：树中所有叶子节点的带权路径长度之和。<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.777ex" xmlns="http://www.w3.org/2000/svg" width="18.797ex" height="2.563ex" role="img" focusable="false" viewBox="0 -789.6 8308.1 1132.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D44A" d="M436 683Q450 683 486 682T553 680Q604 680 638 681T677 682Q695 682 695 674Q695 670 692 659Q687 641 683 639T661 637Q636 636 621 632T600 624T597 615Q597 603 613 377T629 138L631 141Q633 144 637 151T649 170T666 200T690 241T720 295T759 362Q863 546 877 572T892 604Q892 619 873 628T831 637Q817 637 817 647Q817 650 819 660Q823 676 825 679T839 682Q842 682 856 682T895 682T949 681Q1015 681 1034 683Q1048 683 1048 672Q1048 666 1045 655T1038 640T1028 637Q1006 637 988 631T958 617T939 600T927 584L923 578L754 282Q586 -14 585 -15Q579 -22 561 -22Q546 -22 542 -17Q539 -14 523 229T506 480L494 462Q472 425 366 239Q222 -13 220 -15T215 -19Q210 -22 197 -22Q178 -22 176 -15Q176 -12 154 304T131 622Q129 631 121 633T82 637H58Q51 644 51 648Q52 671 64 683H76Q118 680 176 680Q301 680 313 683H323Q329 677 329 674T327 656Q322 641 318 637H297Q236 634 232 620Q262 160 266 136L501 550L499 587Q496 629 489 632Q483 636 447 637Q428 637 422 639T416 648Q416 650 418 660Q419 664 420 669T421 676T424 680T428 682T436 683Z"></path></g><g data-mml-node="mi" transform="translate(1048,0)"><path data-c="1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></g><g data-mml-node="mi" transform="translate(1799,0)"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mo" transform="translate(2757.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="munderover" transform="translate(3813.6,0)"><g data-mml-node="mo"><path data-c="2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path></g><g data-mml-node="TeXAtom" transform="translate(1089,477.1) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(1089,-285.4) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mo" transform="translate(521,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1299,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="msub" transform="translate(6391.3,0)"><g data-mml-node="mi"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g><g data-mml-node="mi" transform="translate(749,-150) scale(0.707)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g></g><g data-mml-node="msub" transform="translate(7558.7,0)"><g data-mml-node="mi"><path data-c="1D459" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path></g><g data-mml-node="mi" transform="translate(331,-150) scale(0.707)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g></g></g></g></svg></mjx-container></p>
-<p><strong>赫夫曼树（最优二叉树）</strong>：设有 n 个权值 {w1, w2, w3…..wn}，其中带权路径长度最小的二叉树即为 赫夫曼树。</p>
-<p><img src="https://i.loli.net/2021/09/06/ehx61Lf7B5rHUDq.png" alt="image-20210906102940546"></p>
-<h2 id="构造赫夫曼树"><a href="#构造赫夫曼树" class="headerlink" title="构造赫夫曼树"></a>构造赫夫曼树</h2><ol>
-<li>根据给定的 n 个权值构成 n 棵二叉树的集合 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.439ex" xmlns="http://www.w3.org/2000/svg" width="17.845ex" height="1.977ex" role="img" focusable="false" viewBox="0 -680 7887.6 874"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"></path></g><g data-mml-node="mo" transform="translate(1026.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(2082.6,0)"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mn" transform="translate(617,-150) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g><g data-mml-node="mo" transform="translate(1020.6,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="msub" transform="translate(1465.2,0)"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mn" transform="translate(617,-150) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mo" transform="translate(2485.8,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mo" transform="translate(2930.4,0)"><path data-c="22EF" d="M78 250Q78 274 95 292T138 310Q162 310 180 294T199 251Q199 226 182 208T139 190T96 207T78 250ZM525 250Q525 274 542 292T585 310Q609 310 627 294T646 251Q646 226 629 208T586 190T543 207T525 250ZM972 250Q972 274 989 292T1032 310Q1056 310 1074 294T1093 251Q1093 226 1076 208T1033 190T990 207T972 250Z"></path></g><g data-mml-node="mo" transform="translate(4269.1,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="msub" transform="translate(4713.8,0)"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(617,-150) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g></g></svg></mjx-container>，其中每一个二叉树 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="2.061ex" height="1.889ex" role="img" focusable="false" viewBox="0 -677 911 834.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(617,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container> 中只有一个带权为 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="2.875ex" height="1.902ex" role="img" focusable="false" viewBox="0 -683 1271 840.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D44A" d="M436 683Q450 683 486 682T553 680Q604 680 638 681T677 682Q695 682 695 674Q695 670 692 659Q687 641 683 639T661 637Q636 636 621 632T600 624T597 615Q597 603 613 377T629 138L631 141Q633 144 637 151T649 170T666 200T690 241T720 295T759 362Q863 546 877 572T892 604Q892 619 873 628T831 637Q817 637 817 647Q817 650 819 660Q823 676 825 679T839 682Q842 682 856 682T895 682T949 681Q1015 681 1034 683Q1048 683 1048 672Q1048 666 1045 655T1038 640T1028 637Q1006 637 988 631T958 617T939 600T927 584L923 578L754 282Q586 -14 585 -15Q579 -22 561 -22Q546 -22 542 -17Q539 -14 523 229T506 480L494 462Q472 425 366 239Q222 -13 220 -15T215 -19Q210 -22 197 -22Q178 -22 176 -15Q176 -12 154 304T131 622Q129 631 121 633T82 637H58Q51 644 51 648Q52 671 64 683H76Q118 680 176 680Q301 680 313 683H323Q329 677 329 674T327 656Q322 641 318 637H297Q236 634 232 620Q262 160 266 136L501 550L499 587Q496 629 489 632Q483 636 447 637Q428 637 422 639T416 648Q416 650 418 660Q419 664 420 669T421 676T424 680T428 682T436 683Z"></path></g><g data-mml-node="mi" transform="translate(977,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container> 的根节点，其左右子树为空；</li>
-<li>在 F 中选取两棵根节点的权值最小的树作为左右子树构造一棵新的二叉树，且置新的二叉树的根节点为此两左右子树的根节点的权值之和；</li>
-<li>在 F 中删除这两棵树，同时将的得到的新的二叉树加入 F 中；</li>
-<li>重复 (2)，(3) 两步骤直到 F 中只有一棵树。这棵树便是 Huffman 树。</li>
-</ol>
-<h2 id="赫夫曼编码"><a href="#赫夫曼编码" class="headerlink" title="赫夫曼编码"></a>赫夫曼编码</h2><p>最初用来解决传送电文时使总长尽可能的短，但是不等长编码解码容易多译，因此要设计不等长编码，就需要每一个字符的编码都不是另一个字符的编码的前缀，这种编码称为<strong>前缀编码</strong>。</p>
-<p>可以用树来实现，约定左分支表示字符 ‘0’，右分支表示字符 ‘1’，则从根节点到叶子节点路径上的分支字符串作为叶子节点的编码。</p>
-<p>那如何使得电文总长最短呢？利用赫夫曼树的原理，得到每种字符在电文中的出现次数为 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="2.36ex" height="1.359ex" role="img" focusable="false" viewBox="0 -443 1043 600.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g><g data-mml-node="mi" transform="translate(749,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container>，编码长度为 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="0.674ex" height="1.595ex" role="img" focusable="false" viewBox="0 -694 298 705"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D459" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path></g></g></g></svg></mjx-container>​ 求得最小 WPL。即：设计电文总长度最短的二进制前缀编码即为以 n 种字符出现的频率做权，设计一棵赫夫曼树的问题。由此得到的二进制前缀编码即称为<strong>赫夫曼编码</strong>。</p>
-<p><img src="https://i.loli.net/2021/09/06/g51rAueicM6zSED.png" alt="image-20210906104825927"></p>
+          Huffman 树及编码
+基础概念及模型图
+路径：从树中一个结点到另一个结点之间的分支构成这两个结点之间的路径，路径上的分支数目称为路径长度。
 
-      
-    </div>
+树的路径长度：是从树根到每一个节点的路径长度之和。
 
-    
-    
-    
+结点的带权路径长度：从该结点到树根之间的路径长度与结点上权的乘积。
 
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
+WPL：树中所有叶子节点的带权路径长度之和。
+
+赫夫曼树（最优二叉树）：设有 n 个权值 {w1, w2, w3…..wn}，其中带权路径长度最小的二叉树即为 赫夫曼树。
 
 
 
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/09/03/MySQL-%E7%B4%A2%E5%BC%95%E6%9C%BA%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="不要因为走的太远，忘了我们为什么出发">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/03/MySQL-%E7%B4%A2%E5%BC%95%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">B- 树和 B+ 树</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-03 09:04:37" itemprop="dateCreated datePublished" datetime="2021-09-03T09:04:37+08:00">2021-09-03</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-09-08 01:31:02" itemprop="dateModified" datetime="2021-09-08T01:31:02+08:00">2021-09-08</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Mysql/%E7%B4%A2%E5%BC%95/" itemprop="url" rel="index"><span itemprop="name">索引</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.6k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="MySQL-索引机制"><a href="#MySQL-索引机制" class="headerlink" title="MySQL 索引机制"></a>MySQL 索引机制</h1><h2 id="B-树（又称为-B-树）"><a href="#B-树（又称为-B-树）" class="headerlink" title="B- 树（又称为 B 树）"></a>B- 树（又称为 B 树）</h2><p>B- 树是一种平衡的多路查找树，主要用作文件的索引，因此它的查找设计外存（主要是硬盘）的存取。</p>
-<p><strong>一颗 m 阶的 B- 树，或为空树，或为满足下列特性的 m 叉树：</strong></p>
-<ol>
-<li>树中的每个节点至多有 m 颗子树；</li>
-<li>若根节点不是叶子节点，则至少有两颗子树；</li>
-<li>除根节点之外的所有非终端结点至少有 m/2(上去整) 颗子树；</li>
-<li>所有非终端节点中包含下列数据信息 (<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="1.357ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 600 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container>​，<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.375ex" xmlns="http://www.w3.org/2000/svg" width="2.685ex" height="1.994ex" role="img" focusable="false" viewBox="0 -716 1186.6 881.6"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mn" transform="translate(783,-150) scale(0.707)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path></g></g></g></g></svg></mjx-container>​，<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.339ex" xmlns="http://www.w3.org/2000/svg" width="2.908ex" height="1.885ex" role="img" focusable="false" viewBox="0 -683 1285.6 833"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43E" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"></path></g><g data-mml-node="mn" transform="translate(882,-150) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></g></svg></mjx-container>​，<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.339ex" xmlns="http://www.w3.org/2000/svg" width="2.685ex" height="1.959ex" role="img" focusable="false" viewBox="0 -716 1186.6 866"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mn" transform="translate(783,-150) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></g></svg></mjx-container>​，<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.339ex" xmlns="http://www.w3.org/2000/svg" width="2.908ex" height="1.885ex" role="img" focusable="false" viewBox="0 -683 1285.6 833"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43E" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"></path></g><g data-mml-node="mn" transform="translate(882,-150) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container>​，<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.339ex" xmlns="http://www.w3.org/2000/svg" width="2.685ex" height="1.959ex" role="img" focusable="false" viewBox="0 -716 1186.6 866"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mn" transform="translate(783,-150) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container>​，<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0.43ex" xmlns="http://www.w3.org/2000/svg" width="2.652ex" height="0.271ex" role="img" focusable="false" viewBox="0 -310 1172 120"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="22EF" d="M78 250Q78 274 95 292T138 310Q162 310 180 294T199 251Q199 226 182 208T139 190T96 207T78 250ZM525 250Q525 274 542 292T585 310Q609 310 627 294T646 251Q646 226 629 208T586 190T543 207T525 250ZM972 250Q972 274 989 292T1032 310Q1056 310 1074 294T1093 251Q1093 226 1076 208T1033 190T990 207T972 250Z"></path></g></g></g></svg></mjx-container>​，<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="3.068ex" height="1.902ex" role="img" focusable="false" viewBox="0 -683 1356.3 840.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43E" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"></path></g><g data-mml-node="mi" transform="translate(882,-150) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container>​，<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="2.844ex" height="1.977ex" role="img" focusable="false" viewBox="0 -716 1257.3 873.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mi" transform="translate(783,-150) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container>​)；K 为关键字，A 为指向子树根节点的指针，且 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.471ex" xmlns="http://www.w3.org/2000/svg" width="4.481ex" height="2.09ex" role="img" focusable="false" viewBox="0 -716 1980.6 924"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="TeXAtom" transform="translate(783,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(345,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(1123,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></g></g></svg></mjx-container>​ 所指子树中的所有结点的关键字都均小于 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="2.661ex" height="1.902ex" role="img" focusable="false" viewBox="0 -683 1176 840.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43E" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"></path></g><g data-mml-node="mi" transform="translate(882,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container>​，<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="2.844ex" height="1.977ex" role="img" focusable="false" viewBox="0 -716 1257.3 873.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mi" transform="translate(783,-150) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container>​ 所指子树中的所有结点均大于 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="3.068ex" height="1.902ex" role="img" focusable="false" viewBox="0 -683 1356.3 840.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43E" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"></path></g><g data-mml-node="mi" transform="translate(882,-150) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container>​，n(<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="23.43ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 10356 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2308" d="M174 734Q178 746 190 750H298H369Q400 750 411 747T422 730T411 713T372 709Q365 709 345 709T310 710H214V-235Q206 -248 196 -250Q192 -250 189 -249T184 -247T180 -244T178 -241T176 -237T174 -234V734Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(444,0)"><g data-mml-node="mi"><path data-c="1D45A" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(878,0)"><g data-mml-node="mo"><path data-c="2F" d="M423 750Q432 750 438 744T444 730Q444 725 271 248T92 -240Q85 -250 75 -250Q68 -250 62 -245T56 -231Q56 -221 230 257T407 740Q411 750 423 750Z"></path></g></g><g data-mml-node="mn" transform="translate(1378,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mo" transform="translate(2322,0)"><path data-c="2309" d="M21 717T21 730T32 746T75 750H147H256Q266 742 269 735V-235Q262 -248 251 -250Q247 -250 244 -249T239 -247T235 -244T233 -241T231 -237T229 -234V710H133Q119 710 99 710T71 709Q43 709 32 713Z"></path></g><g data-mml-node="mo" transform="translate(2988.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(3988.4,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(4766.2,0)"><path data-c="2264" d="M674 636Q682 636 688 630T694 615T687 601Q686 600 417 472L151 346L399 228Q687 92 691 87Q694 81 694 76Q694 58 676 56H670L382 192Q92 329 90 331Q83 336 83 348Q84 359 96 365Q104 369 382 500T665 634Q669 636 674 636ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"></path></g><g data-mml-node="mi" transform="translate(5822,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(6699.8,0)"><path data-c="2264" d="M674 636Q682 636 688 630T694 615T687 601Q686 600 417 472L151 346L399 228Q687 92 691 87Q694 81 694 76Q694 58 676 56H670L382 192Q92 329 90 331Q83 336 83 348Q84 359 96 365Q104 369 382 500T665 634Q669 636 674 636ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"></path></g><g data-mml-node="mi" transform="translate(7755.6,0)"><path data-c="1D45A" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(8855.8,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(9856,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></svg></mjx-container>​​ )，为关键字的个数（n+1 为子树个数）；</li>
-<li>所有叶子节点出现在同一层次上，并且不带信息（可以看作外部节点或者查找失败的节点，实际上这些节点并不存在，指向这些节点的指针为空）；</li>
-</ol>
-<h3 id="B-树查找分析"><a href="#B-树查找分析" class="headerlink" title="B- 树查找分析"></a><strong>B- 树查找分析</strong></h3><p>主要包含两种操作：</p>
-<ol>
-<li>在 B- 树中查找结点；<br>由于 B- 树通常存储在磁盘上，则这一查找操作是在磁盘上进行的。</li>
-<li>在结点中查找关键字；<br>找到结点后，将结点中的信息读入内存，再利用顺序还是折半查找等于 K 的关键字。</li>
-</ol>
-<p>分析：因为在磁盘上的一次查找比内存中的费时多得多，所以待查关键字在 B- 树上的层次是决定 B- 查找效率的首要因素。</p>
-<h2 id="B-树"><a href="#B-树" class="headerlink" title="B+ 树"></a>B+ 树</h2><p>B+ 树应文件系统所需而出的一种 B- 树的变型树。一颗 m 阶的 B+ 树和 m 阶的 B- 树差异在于：</p>
-<ol>
-<li>有 n 颗子树的结点中含有 n 个关键字；</li>
-<li>所有叶子节点中包含了全部关键字的信息，及指向这些关键字的指针，且叶子结点本身依关键字的大小自小而大顺序链接；</li>
-<li>所有非终端节点可以看成索引部分，节点中仅含有其子树（根节点）中的最大或最小关键字</li>
-</ol>
-<p>通常 B+ 树上有两个头指针，一个指向根节点，另一个指向关键字最小的叶子节点。因此对 B+ 树查找有两种：一种是从最小关键字顺序查找；另一种是从根节点随机查找。</p>
-<p>B+ 树的随机查找、插入、删除过程基本和 B- 树类似，只是在查找时，若非终端结点上的关键字等于给定值，并不终止，而是继续向下到叶子结点，因此 B+ 树的查找不论成功与否，都是走了一条从根节点到叶子节点的路径。</p>
-<h2 id="MySQL-索引（B-树）理解"><a href="#MySQL-索引（B-树）理解" class="headerlink" title="MySQL 索引（B+树）理解"></a>MySQL 索引（B+树）理解</h2><p>原文章链接：</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/awodwde/article/details/111874153">https://blog.csdn.net/awodwde/article/details/111874153</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/universsky2015/article/details/102712058">https://blog.csdn.net/universsky2015/article/details/102712058</a></li>
-</ol>
-<h3 id="MySQL-索引为啥用-b-树"><a href="#MySQL-索引为啥用-b-树" class="headerlink" title="MySQL  索引为啥用 b+ 树"></a>MySQL  索引为啥用 b+ 树</h3><p>Mysql 的数据是放在外部存储的，也就是说磁盘 IO 才是性能瓶颈的关键，所以我们需要的是减少树的深度，所以我们需要更多分叉的树，还需要更适合磁盘操作特性的数据结构。</p>
-<p>AVL 数和红黑树基本都是存储在内存中才会使用的数据结构。在大规模数据存储的时候，红黑树往往出现由于树的深度过大而造成磁盘 IO 读写过于频繁，进而导致效率低下的情况。为什么会出现这样的情况，我们知道要获取磁盘上数据，必须先通过磁盘移动臂移动到数据所在的柱面，然后找到指定盘面，接着旋转盘面找到数据所在的磁道，最后对数据进行读写。磁盘IO代价主要花费在查找所需的柱面上，树的深度过大会造成磁盘IO频繁读写。根据磁盘查找存取的次数往往由树的高度所决定，所以，只要我们通过某种较好的树结构减少树的结构尽量减少树的高度，B树可以有多个子女，从几十到上千，可以降低树的高度。</p>
-<p>数据库系统的设计者巧妙利用了磁盘预读原理，将一个节点的大小设为等于一个页，这样每个节点只需要一次I/O就可以完全载入。为了达到这个目的，在实际实现B-Tree还需要使用如下技巧：每次新建节点时，直接申请一个页的空间，这样就保证一个节点物理上也存储在一个页里，加之计算机存储分配都是按页对齐的，就实现了一个node只需一次I/O。</p>
-<p><strong>索引：</strong>可以提高数据检索的效率，降低数据库的 IO 成本。</p>
-<p><strong>聚簇索引：</strong>将数据存储与索引放到了一块，找到索引就找到了数据。</p>
-<p><strong>非聚簇索引：</strong>数据存储和索引分开放，索引结构的叶子节点指向了数据的对应行，myisam通过 key_buffer 把索引先缓存到内存中，当需要访问数据时（通过索引访问数据），在内存中直接搜索索引，然后通过索引找到磁盘相应数据，这也就是为什么索引不在 key buffer 命中时，速度慢的原因（磁盘 IO）。</p>
-<blockquote>
-<p>索引和数据在一起就是聚簇索引，不在一起就叫非聚簇索引。</p>
-</blockquote>
-<ol>
-<li><p>MySQL 5.7 以后的 MySQL 默认引擎都是 InnoDB</p>
-</li>
-<li><p>按照索引的键是否为主键来分为<strong>主索引</strong>和<strong>辅助索引</strong>，因此：主索引只能有一个，辅助索引可以有很多个，辅助索引访问数据总是需要二次查找，只有主键索引为主索引，其他都是辅助索引；</p>
-</li>
-<li><p>InnoDB中主键索引为聚簇索引，辅助索引是非聚簇索引：主键索引中通过 B+ 树找到的叶子节点的数据包含了所有的数据；辅助索引的叶子节点的数据仅仅包含了辅助节点的数据，不包含所有的数据，如果需要索引外的内容，则需要回表；</p>
-</li>
-</ol>
-<p><img src="https://i.loli.net/2021/09/08/RzZ5JxdhiwluM4p.png" alt="img"></p>
-<h3 id="InnoDB-聚簇索引"><a href="#InnoDB-聚簇索引" class="headerlink" title="InnoDB 聚簇索引"></a>InnoDB 聚簇索引</h3><ol>
-<li>InnoDB 使用的是聚簇索引，将主键组织到一棵 B+ 树中，而行数据就储存在叶子节点上，若使用 “where id = 14” 这样的条件查找主键，则按照 B+ 树的检索算法即可查找到对应的叶节点，之后获得行数据。</li>
-<li>若对 Name 列进行条件搜索，则需要两个步骤：<ol>
-<li>第一步在辅助索引 B+ 树中检索 Name，到达其叶子结点获取对应的主键。</li>
-<li>第二步使用主键在主索引 B+ 树中再执行一次 B+ 树检索操作，最终到达叶子节点即可获取整行数据。（重点在于通过其他键需要建立辅助索引）</li>
-</ol>
-</li>
-</ol>
-<h3 id="聚簇索引的优势"><a href="#聚簇索引的优势" class="headerlink" title="聚簇索引的优势"></a>聚簇索引的优势</h3><p>看上去聚簇索引效率明显低于非聚簇索引，因为每次使用辅助索引都是检索两次 B+ 树，这不是多此一举？优势呢？</p>
-<ol>
-<li>由于行数据和叶子节点存储在一起，同一页中会有多条行数据，访问同一数据页不同行记录时，已经把页加载到了 Buffer 中，再次访问的时候，会在内存中完成访问，不必访问磁盘。这样主键和行数据是一起被载入内存的，找到叶子节点就可以立刻将行数据返回了，如果按照主键 ID 来组织数据，获得数据更快。</li>
-<li>辅助索引使用主键作为 “指针” 而不是使用地址值作为指针的好处是，减少了当出现行移动或者数据页分裂时辅助缩印的维护工作，使用主键值当作指针会让辅助索引占用更多的空间，换来的好处是 InnoDB 在移动行时无须更新辅助索引中的这个”指针”。也就是说行的位置（实现中通过16K 的 Page 来定位）会随着数据库里数据的修改而发生变化（前面的 B+ 树节点分裂以及 Page 的分裂），使用聚簇索引就可以保证不管这个主键 B+ 树的节点如何变化，辅助索引树都不受影响。</li>
-<li>聚簇索引适合用在排序的场合，非聚簇索引不适合；</li>
-<li>取出一定范围数据的时候，使用用聚簇索引；</li>
-</ol>
-<h3 id="聚簇索引的优势-1"><a href="#聚簇索引的优势-1" class="headerlink" title="聚簇索引的优势"></a>聚簇索引的优势</h3><ol>
-<li>维护索引很昂贵，特别是插入新行或者主键被更新导致要分页的时候。建议在大量插入新行后，选在负载较低的时间段，通过OPTIMIZE TABLE优化表，因为必须被移动的行数据可能造成碎片。使用独享表空间可以弱化碎片</li>
-<li>表因为使用 UUID（随机ID）作为主键，使数据存储稀疏，这就会出现聚簇索引有可能有比全表扫面更慢，</li>
-</ol>
-<h2 id="B-树作为索引的优势"><a href="#B-树作为索引的优势" class="headerlink" title="B+ 树作为索引的优势"></a>B+ 树作为索引的优势</h2><ol>
-<li>磁盘的读写的代价更低：<br>B 树的数据和索引在同一个节点，那么每个块中包含的索引是少量的，如果想要去除比较深层的数据，意味着要读取更多的块，才能得到想要的索引和数据，那么就增加了 IO 次数。</li>
-<li>随机 IO 的次数更少：<br>随机 IO 是指读写操作时间连续，但访问地址不连续，时长约为 10ms；顺序 IO  是读取和写入基于逻辑块逐个连续访问来自相邻地址的数据，时长约为 0.1ms ；<br>在相同情况下，B 树要进行更多的随机 IO，而 B+ 树要进行更多的顺序 IO，因此 B+ 树效率更高。</li>
-<li>查询速度更稳定：<br>由于 B+ 树叶子节点不存储数据，因此所有的数据都要查询至叶子节点，而叶子节点的高度都是一样的，因此所有数据的查询速度都是一样的。</li>
-</ol>
-<h3 id="为什么主键通常建议使用自增-ID"><a href="#为什么主键通常建议使用自增-ID" class="headerlink" title="为什么主键通常建议使用自增 ID"></a>为什么主键通常建议使用自增 ID</h3><p>聚簇索引的数据的物理位置与索引顺序是一致的，即：只要索引是相邻的，那么对应的数据一定也是相邻的存放在磁盘上的。如果主键不是自增 ID，那么可以想象，它会干些什么，不断调整数据的物理地址、分页、当然也有其他一些措施来减少这些操作，但却无法彻底避免。但，如果是自增的，那就简单了，它只需要一 页一页地写，索引结构相对紧凑，磁盘碎片少，效率也高。</p>
-<h2 id="InnoDB-和-MyISAM-的区别"><a href="#InnoDB-和-MyISAM-的区别" class="headerlink" title="InnoDB 和 MyISAM 的区别"></a>InnoDB 和 MyISAM 的区别</h2><ol>
-<li>数据的存储方式：<ul>
-<li>InnoDB 由两种文件组成：表结构、数据和索引；</li>
-<li>MyISAM 由三种文件组成，表结构、数据、索引；</li>
-</ul>
-</li>
-<li>索引的方式：<ul>
-<li>相同点：都是基于 B+ 树的数据结构建立的；</li>
-<li>不同点：<br>InnoDB 中主键索引为聚簇索引，辅助索引是非聚簇索引；<br>MyISAM 中数据和索引存在不同的文件中，因此都是非聚簇索引；</li>
-</ul>
-</li>
-<li>事务的支持：<ul>
-<li>InnoDB：支持事务；</li>
-<li>MyISAM：不支持事务；</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://charlesyb.github.io/2021/09/02/Java-lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="不要因为走的太远，忘了我们为什么出发">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/02/Java-lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">Java lambda 表达式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-09-02 10:46:17 / 修改时间：11:04:04" itemprop="dateCreated datePublished" datetime="2021-09-02T10:46:17+08:00">2021-09-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/Lambda/" itemprop="url" rel="index"><span itemprop="name">Lambda</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.5k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Lambda-表达式"><a href="#Lambda-表达式" class="headerlink" title="Lambda 表达式"></a>Lambda 表达式</h1><blockquote>
-<p>函数式接口：<br>    任何接口，如果只包含一个抽象方法，那么它就是一个函数式接口。<br>    我们可以通过 Lambda 表达式来创建该接口的对象。</p>
-</blockquote>
-<h3 id="Lambda-简化过程"><a href="#Lambda-简化过程" class="headerlink" title="Lambda 简化过程"></a>Lambda 简化过程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Like1 like1 = <span class="keyword">new</span> Like1();</span><br><span class="line">        System.out.println(like1.getClass().getName());</span><br><span class="line">        like1.lambda();</span><br><span class="line"></span><br><span class="line">        Like2 like2 = <span class="keyword">new</span> Like2();</span><br><span class="line">        System.out.println(like2.getClass().getName());</span><br><span class="line">        like2.lambda();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 局部内部类实现 ILike 接口</span></span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Like3</span> <span class="keyword">implements</span> <span class="title">ILike</span> </span>&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lambda</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;i like lambda3&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Like3 like3 = <span class="keyword">new</span> Like3();</span><br><span class="line">        System.out.println(like3.getClass().getName());</span><br><span class="line">        like3.lambda();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4. 匿名内部类简化代码</span></span><br><span class="line">        ILike like4 = <span class="keyword">new</span> ILike() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lambda</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;i like lambda4&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        System.out.println(like4.getClass().getName());</span><br><span class="line">        like4.lambda();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5. lambda 表达式简化代码</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            继续简化：如果多个参数类型可以推导，则可以取消掉所有的返回值类型；</span></span><br><span class="line"><span class="comment">                    如果参数只有一个，可以把括号也简化掉；</span></span><br><span class="line"><span class="comment">                    如果只有一行语句，还可以把花括号简化掉；</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        ILike like5 = () -&gt; &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;i like lambda5&quot;</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">        like5.lambda();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2. 静态内部类实现 ILike 接口</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Like2</span> <span class="keyword">implements</span> <span class="title">ILike</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lambda</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;i like lambda2&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">定义一个函数式接口（任何接口，如果只包含唯一一个抽象方法，则它是一个函数式接口）</span></span><br><span class="line"><span class="comment"> 作用：</span></span><br><span class="line"><span class="comment">    1. 避免内部类定义过多；</span></span><br><span class="line"><span class="comment">    2. 属于函数式编程的概念</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ILike</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">lambda</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 定义一个实现类，实现 lambda 方法执行</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Like1</span> <span class="keyword">implements</span> <span class="title">ILike</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lambda</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;i like lambda1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+构造赫夫曼树
+ 1. 根据给定的 n 个权值构成 n
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/06/Huffman-%E6%A0%91%E5%8F%8A%E7%BC%96%E7%A0%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1780,14 +1540,14 @@ mjx-container[display="true"] + br {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">35k</span>
+    <span title="站点总字数">36k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">32 分钟</span>
+    <span title="站点阅读时长">33 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
