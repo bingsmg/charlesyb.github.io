@@ -3216,3 +3216,9 @@ span.exturl:hover {
 .sidebar-inner {
   background: rgba(255,255,255,0.7) none repeat scroll !important;
 }
+.footer-inner span {
+  opacity: 0.95;
+}
+.pagination animated fadeIn {
+  opacity: 0.9;
+}
