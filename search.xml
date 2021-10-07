@@ -112,11 +112,11 @@
     
     
     <entry>
-      <title>面经</title>
-      <link href="/2021/09/08/%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93/"/>
-      <url>/2021/09/08/%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93/</url>
+      <title>面经积累</title>
+      <link href="/2021/09/08/%E9%9D%A2%E7%BB%8F%E7%A7%AF%E7%B4%AF/"/>
+      <url>/2021/09/08/%E9%9D%A2%E7%BB%8F%E7%A7%AF%E7%B4%AF/</url>
       
-        <content type="html"><![CDATA[<h1 id="茄子科技一面"><a href="#茄子科技一面" class="headerlink" title="茄子科技一面"></a>茄子科技一面</h1><ol><li>自我介绍</li><li>HashMap 底层机制（数组链表红黑树，以及一些细节），如果需要有序呢？（LinkedHashMap）如果需要按照大小呢？（TreeMap）</li><li>MySQL 事务隔离级别？默认隔离级别呢？他们之间的区别呢？会引起什么问题呢？</li><li>MySQL 索引机制，InnoDB 引擎使用的聚簇索引，然后 B+ 树？</li><li>MySQL SQL语句查询慢，你是如何排查的，什么命令？一个啥来着</li><li>查询日志的最后的几行日志文件，使用的是什么命令（tail），查询前几行的命令呢？</li><li>双亲委派机制说一下？类加载具体说一说？</li><li>GC 了解过吗？说一说算法？</li><li>堆呢？比如我现在有一个大的对象，应该存放在什么地方？（老年区）</li><li>现在有一组线程，我想让他们一起执行，应该使用什么方法？（CountDownLatch）</li><li>Java 锁机制了解多少？读写锁说一下？</li><li>Lock 锁和 Synchronize 关键字的区别？</li><li>有一个计数变量，来统计多个线程，怎么操作？CAS，CAS 的不好的地方？</li><li>Redis 记录一个 UV 的话，用什么数据结构，啥 BitMap还有啥啥的</li><li>Volatile 关键字说一下，以及它的作用？</li><li>Spring 了解多少？Spring 框架用了哪些设计模式，单例模式说一下都有啥？</li><li>ConcurrentHashMap？与 HashMap 的区别，底层怎么实现的？</li></ol><h1 id="途虎养车一面"><a href="#途虎养车一面" class="headerlink" title="途虎养车一面"></a>途虎养车一面</h1><ol><li><p>Redis 的数据结构？list 结构一般用于什么场景？</p></li><li><p>LinkedHashMap 一般用在什么场景？</p></li><li><p>Zookeeper 你了解多少？用它来做什么？底层机制了解过吗？</p></li><li><p>JVM 了解多少？说一下，就把类加载和运行时数据区都说了一下</p></li><li><p>一道编程题，合并两个有序链表</p></li><li><p>Mysql 事务隔离级别，以及会引起什么问题？可串行化级别一般使用在什么场景？</p></li></ol>]]></content>
+        <content type="html"><![CDATA[<h1 id="面经整合"><a href="#面经整合" class="headerlink" title="面经整合"></a>面经整合</h1><ol><li><a href="https://i.loli.net/2021/09/08/8ZvD45OzrVHxeUs.png">高频 精心整理 20 道高频 Java 集合面试题</a></li><li><a href="https://www.cnblogs.com/javazhiyin/p/13839357.html">Redis 面试高频题目</a></li><li><a href="https://www.pianshen.com/article/2791985168/">有赞面经</a></li></ol>]]></content>
       
       
       <categories>
@@ -137,11 +137,11 @@
     
     
     <entry>
-      <title>面经积累</title>
-      <link href="/2021/09/08/%E9%9D%A2%E7%BB%8F%E7%A7%AF%E7%B4%AF/"/>
-      <url>/2021/09/08/%E9%9D%A2%E7%BB%8F%E7%A7%AF%E7%B4%AF/</url>
+      <title>面经</title>
+      <link href="/2021/09/08/%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93/"/>
+      <url>/2021/09/08/%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93/</url>
       
-        <content type="html"><![CDATA[<h1 id="面经整合"><a href="#面经整合" class="headerlink" title="面经整合"></a>面经整合</h1><ol><li><a href="https://i.loli.net/2021/09/08/8ZvD45OzrVHxeUs.png">高频 精心整理 20 道高频 Java 集合面试题</a></li><li><a href="https://www.cnblogs.com/javazhiyin/p/13839357.html">Redis 面试高频题目</a></li><li><a href="https://www.pianshen.com/article/2791985168/">有赞面经</a></li></ol>]]></content>
+        <content type="html"><![CDATA[<h1 id="茄子科技一面"><a href="#茄子科技一面" class="headerlink" title="茄子科技一面"></a>茄子科技一面</h1><ol><li>自我介绍</li><li>HashMap 底层机制（数组链表红黑树，以及一些细节），如果需要有序呢？（LinkedHashMap）如果需要按照大小呢？（TreeMap）</li><li>MySQL 事务隔离级别？默认隔离级别呢？他们之间的区别呢？会引起什么问题呢？</li><li>MySQL 索引机制，InnoDB 引擎使用的聚簇索引，然后 B+ 树？</li><li>MySQL SQL语句查询慢，你是如何排查的，什么命令？一个啥来着</li><li>查询日志的最后的几行日志文件，使用的是什么命令（tail），查询前几行的命令呢？</li><li>双亲委派机制说一下？类加载具体说一说？</li><li>GC 了解过吗？说一说算法？</li><li>堆呢？比如我现在有一个大的对象，应该存放在什么地方？（老年区）</li><li>现在有一组线程，我想让他们一起执行，应该使用什么方法？（CountDownLatch）</li><li>Java 锁机制了解多少？读写锁说一下？</li><li>Lock 锁和 Synchronize 关键字的区别？</li><li>有一个计数变量，来统计多个线程，怎么操作？CAS，CAS 的不好的地方？</li><li>Redis 记录一个 UV 的话，用什么数据结构，啥 BitMap还有啥啥的</li><li>Volatile 关键字说一下，以及它的作用？</li><li>Spring 了解多少？Spring 框架用了哪些设计模式，单例模式说一下都有啥？</li><li>ConcurrentHashMap？与 HashMap 的区别，底层怎么实现的？</li></ol><h1 id="途虎养车一面"><a href="#途虎养车一面" class="headerlink" title="途虎养车一面"></a>途虎养车一面</h1><ol><li><p>Redis 的数据结构？list 结构一般用于什么场景？</p></li><li><p>LinkedHashMap 一般用在什么场景？</p></li><li><p>Zookeeper 你了解多少？用它来做什么？底层机制了解过吗？</p></li><li><p>JVM 了解多少？说一下，就把类加载和运行时数据区都说了一下</p></li><li><p>一道编程题，合并两个有序链表</p></li><li><p>Mysql 事务隔离级别，以及会引起什么问题？可串行化级别一般使用在什么场景？</p></li></ol>]]></content>
       
       
       <categories>
